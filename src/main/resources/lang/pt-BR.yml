@@ -1,0 +1,28 @@
+# Gastronomicon language file - Portuguese (Brazil)
+#
+# This file is used automatically when options.language in config.yml is
+# left as "auto" and Slimefun's own default language is pt-BR. Any key left
+# untranslated (or missing) here falls back to lang/en_US.yml, so a partial
+# translation is fine - the values below are still in English as
+# placeholders, ready to be translated.
+#
+# Colors use Minecraft's '&' color codes (e.g. &7 for gray, &b for aqua).
+# Currently only a handful of items are wired up to this file as an example -
+# most item names/lore are still hardcoded in Java and will be migrated over
+# time, so translating this file alone won't yet cover every item.
+
+items:
+  GN_TOASTER:
+    name: "Toaster"
+    lore:
+      - "&7Right-click it while holding Sliced Bread"
+      - "&7to feed it - after 5 seconds it"
+      - "&7toasts into a Toasted Bread"
+  GN_TOASTED_BREAD:
+    name: "Toasted Bread"
+  GN_COFFEE_MACHINE:
+    name: "Coffee Machine"
+    lore:
+      - "&7Insert ingredients, a tool and a container,"
+      - "&7then click Start to begin brewing"
+      - "&7Click again to stop early"

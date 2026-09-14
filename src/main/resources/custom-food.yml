@@ -1,0 +1,68 @@
+### Custom Food
+#
+# Format:
+# FOOD_ID
+#   - name: str
+#   - (optional) lore: [list: str]
+#   - hunger: int
+#   - saturation-ratio: double (or) - saturation: int
+#   - material: MATERIAL (or) - texture: TEXTURE
+#   - effects:
+#     - EFFECT_TYPE: [parameters]
+#   - recipe: {...}
+#
+# In the above configuration,
+#   FOOD_ID is the food's ID. It may only contain uppercase letters, digits, and underscores,
+#     and must not duplicate an existing item. Gastronomicon will add a `GN_` prefix to the ID
+#     when registering the item.
+#   MATERIAL must be a valid vanilla item ID,
+#   TEXTURE must be a base64-encoded head texture
+#     (see https://bukkit.org/threads/create-your-own-custom-head-texture.424286/),
+#   EFFECT_TYPE must be one of the food effect types listed below
+# The recipe format is described further below
+#
+# Note that only one of `saturation-ratio` and `saturation` may be present.
+#       Likewise, only one of `material` and `texture` may be present.
+#
+# Food effect types:
+#   heal [amount: int]: Heals [amount] health. (amount > 0)
+#   positive-potion-effect [type: potion effect type] [int duration] [int level]:
+#     Gives the player the specified positive effect
+#   negative-potion-effect [type: potion effect type] [int duration] [int level]:
+#     Gives the player the specified negative effect
+#   remove-potion-effect [type: potion effect type]: Removes the specified effect
+#   clear-potion-effects: Clears all potion effects
+#   xp [amount: int]: Gives the player [amount] XP
+#   item [material: MATERIAL] [amount: int]: Gives the player a vanilla item
+#   slimefun-item: [id: str] [amount: int]: Gives the player a Slimefun item
+#   air [amount: int]: Restores [amount] air to the player
+#   warm [amount: int]: Reduces the player's freeze ticks by [amount]
+#   teleport [radius: int]: Randomly teleports the player within [radius] blocks
+#   move [vx: double] [vy: double] [vz: double] [description: str]: Launches the player in the direction [vx vy vz]^T
+#   extinguish: Extinguishes the player
+#
+# Other food effect types cannot be defined through this file. If you need to add other types,
+# you will need to write your own plugin implementation.
+# See the Wiki for more information: https://schn.pages.dev/gastronomicon/custom-food
+#
+# Recipe format:
+# - shape: SHAPED / SHAPELESS
+# - workbench: CULINARY_WORKBENCH / MULTI_STOVE / FREEZER / GRAIN_MILL / FERMENTER
+# - ingredients: [list: MATERIAL / SLIMEFUN_ID]
+# - (OPTIONAL) tools: [list: str]
+# - (OPTIONAL) container: MATERIAL / SLIMEFUN_ID
+# (Workbench-specific parameters:)
+# - temperature: HIGH / MEDIUM / LOW (for Multi-Stove, defaults to MEDIUM)
+#
+# Example:
+# GN_BAKED_BEANS_AND_TOAST:
+#   - name: Baked Beans and Toast
+#   - hunger: 8
+#   - saturation-ratio: 1
+#   - effects:
+#     - positive-potion-effect: [DAMAGE_RESISTANCE, 90, 0]
+#   - recipe:
+#     - shape: SHAPED
+#     - workbench: CULINARY_WORKBENCH
+#     - ingredients: [null, null, null, null, GN_BAKED_BEANS, null, null, GN_TOAST, null]
+#

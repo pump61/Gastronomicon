@@ -1,0 +1,58 @@
+options:
+  # Whether to enable auto-update
+  auto-update: true
+
+  # The language file to use, from the plugin's lang/ folder (either bundled
+  # or one you've placed there yourself). Set to "auto" (the default) to
+  # follow Slimefun's own configured default language automatically -
+  # set a specific locale (e.g. en_US) here instead to override that.
+  # Defaults to en_US if the resolved locale can't be found. See
+  # lang/en_US.yml for how to add your own translation.
+  language: auto
+
+# Whether to disable adding Gastronomicon's plants to DynaTech's growing chambers.
+disable-dynatech-integration: true
+
+# The chance of crafting a perfect food (0-1)
+perfect-food-max-chance: 0.25
+
+# The food proficiency required to train a Chef Android, and the food proficiency required to count towards a player's profile
+proficiency-threshold: 256
+
+drops:
+  # The chance for the corresponding block to drop Gastronomicon seeds (0-1)
+  block-break-chances:
+    short-grass: 0.05
+    # On servers running 1.20.3 and above, change this to modify the drop rate of grass
+    grass: 0.05
+    # On servers running below 1.20.3, change this to modify the drop rate of grass
+    tall-grass: 0.1
+    fern: 0.05
+    large-fern: 0.1
+    podzol: 0.03
+    dirt: 0.01
+    grass-block: 0.04
+    rooted-dirt: 0.03
+    mycelium: 0.05
+    seagrass: 0.15
+
+  # The chance for killing a mob to drop Gastronomicon items (0-1)
+  mob-kill-chances:
+    squid: 0.35
+    guardian: 0.35
+    goat: 0.35
+    salmon: 0.35
+
+
+  # List of worlds where block drops and mob drops are disabled
+  disabled-in: []
+
+
+profile:
+  # Titles for player profiles
+  titles:
+    0: Not a Chef
+    1: Novice Chef
+    50: Apprentice Chef
+    100: Experienced Chef
+    200: Three-Star Chef

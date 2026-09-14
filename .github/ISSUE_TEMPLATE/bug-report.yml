@@ -1,0 +1,130 @@
+name: Bug Report
+description: Report a bug or issue with this plugin
+labels: ["bug"]
+assignees:
+  - ybw0014
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Welcome to the SlimefunGuguProject issue tracker
+        You are reporting a bug found in the localized version of Gastronomicon.
+        For any comments or suggestions, please give feedback in the [QQ group](https://50l.cc/gugu-qgroup).
+        It is recommended to first read [this article](https://slimefun-wiki.guizhanss.cn/How-to-report-bugs) to learn how to properly report a bug.
+
+        <strong><i>You must fill in the form fields marked with an asterisk (*)</i></strong>
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      description: Before reporting, please confirm
+      options:
+        - label: You are using a version downloaded from the build server
+          required: true
+        - label: You have verified the checksum of the downloaded file to confirm it downloaded completely
+          required: true
+        - label: You have not made any changes to the contents of the downloaded file
+          required: true
+        - label: You have searched the [known issues list](https://github.com/SlimefunGuguProject/Gastronomicon/issues) and have not found the same issue
+          required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Issue Description
+      description: |
+        Describe in detail the issue you are reporting
+        Providing detailed information will let us resolve the issue faster
+      placeholder: Simply saying "it doesn't work" won't help developers locate the problem.
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to Reproduce
+      description: |
+        Please describe in detail how to reproduce this issue
+        If you have a video, please provide the video link here
+      placeholder: |
+        1. xxx
+        2. xxx
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: Expected Behavior
+      description: |
+        What do you think should happen
+        Sometimes, the cause of an issue is a misunderstanding of a feature.
+    validations:
+      required: true
+
+  - type: input
+    id: server-log
+    attributes:
+      label: Server Log
+      description: |
+        Please check the server log for any errors. If there are any, upload them to [https://paste.guizhanss.net/](https://paste.guizhanss.net/) and paste the link here.
+        **Do not paste the log directly here**
+      placeholder: https://paste.guizhanss.net/...
+    validations:
+      required: false
+
+  - type: input
+    id: error-report
+    attributes:
+      label: Error Report
+      description: |
+        If the server log mentions a file in `/plugins/Slimefun/error-reports` (i.e. an error report),
+        please upload it to [https://paste.guizhanss.net/](https://paste.guizhanss.net/) and paste the link here.
+        **Do not paste the error report directly here**
+      placeholder: https://paste.guizhanss.net/...
+    validations:
+      required: false
+
+  - type: dropdown
+    id: server-software
+    attributes:
+      label: Server Software
+      description: Please select the software your server uses
+      options:
+        - Spigot
+        - Paper
+        - Purpur
+        - Airplane
+        - Other (please specify in the issue description)
+    validations:
+      required: true
+
+  - type: input
+    id: minecraft-version
+    attributes:
+      label: Minecraft Version
+      description: Please fill in your Minecraft version
+    validations:
+      required: true
+
+  - type: textarea
+    id: slimefun-version
+    attributes:
+      label: Slimefun Version
+      description: |
+        Please fill in the Slimefun version
+        (e.g. v4.9-canary-08120db)
+        If you have admin permissions, it is recommended to run the `/sf versions` command, take a screenshot, and upload the **entire** output here.
+    validations:
+      required: true
+
+  - type: input
+    id: version-plugin
+    attributes:
+      label: Plugin Version
+      description: |
+        Please fill in the plugin version
+        (e.g. Build 1 (git x114514))
+    validations:
+      required: true

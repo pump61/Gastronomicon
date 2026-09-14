@@ -1,0 +1,45 @@
+name: Gastronomicon
+
+author: SchnTgaiSpock
+
+description: A Slimefun addon that adds even more food to the game
+
+main: io.github.schntgaispock.gastronomicon.Gastronomicon
+
+website: https://github.com/SchnTgaiSpock/Gastronomicon
+
+version: ${project.version}
+
+api-version: 1.21
+
+depend:
+  - Slimefun
+
+softdepend:
+  - GuizhanLibPlugin
+  - SlimeHUD
+  - DynaTech # For automation
+
+loadbefore:
+  - SlimeCustomizer
+
+commands:
+  gastronomicon:
+    description: /gastronomicon
+    aliases: [gastro, gn]
+    usage: Press [tab] for usage hints
+
+permissions:
+  gastronomicon:
+    checkprofile:
+      description: Ability to view your Gastronomicon profile
+      default: true
+      op: true
+    checkotherprofile:
+      description: Ability to view another player's profile
+      default: false
+      op: true
+    modifyprofile:
+      description: Ability to change a player's Gastronomicon profile
+      default: false
+      op: false

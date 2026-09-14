@@ -1,0 +1,13 @@
+/bin/
+/.settings/
+/target/
+/.idea/
+/.vscode/
+.markdownlint.json
+*.iml
+.project
+.classpath
+dependency-reduced-pom.xml
+.DS_Store
+eclipse-formatter.xml
+*.py

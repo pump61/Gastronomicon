@@ -1,0 +1,36 @@
+# Gastronomicon language file - English (United States)
+#
+# This is the default/fallback language. Every other lang/<locale>.yml only
+# needs to translate the keys it actually has content for - anything missing
+# falls back to this file automatically, so a partial translation is fine.
+#
+# To add a new language:
+#   1. Copy this file to lang/<locale>.yml in the plugin's data folder
+#      (plugins/Gastronomicon/lang/). Name it after Slimefun's own language
+#      id (e.g. lang/pt-BR.yml) so it's picked up automatically when
+#      options.language is left as "auto" (the default) and a player's
+#      Slimefun language matches - or name it anything and set
+#      options.language to that name to use it explicitly instead.
+#   2. Translate the values (never the keys on the left of the ':').
+#   3. Restart/reload.
+#
+# Colors use Minecraft's '&' color codes (e.g. &7 for gray, &b for aqua).
+# Currently only a handful of items are wired up to this file as an example -
+# most item names/lore are still hardcoded in Java and will be migrated over
+# time.
+
+items:
+  GN_TOASTER:
+    name: "Toaster"
+    lore:
+      - "&7Right-click it while holding Sliced Bread"
+      - "&7to feed it - after 5 seconds it"
+      - "&7toasts into a Toasted Bread"
+  GN_TOASTED_BREAD:
+    name: "Toasted Bread"
+  GN_COFFEE_MACHINE:
+    name: "Coffee Machine"
+    lore:
+      - "&7Insert ingredients, a tool and a container,"
+      - "&7then click Start to begin brewing"
+      - "&7Click again to stop early"
