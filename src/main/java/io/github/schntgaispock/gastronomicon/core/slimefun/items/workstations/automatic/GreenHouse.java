@@ -12,6 +12,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 
 import io.github.schntgaispock.gastronomicon.Gastronomicon;
+import io.github.schntgaispock.gastronomicon.core.Lang;
 import io.github.schntgaispock.gastronomicon.core.slimefun.GastroGroups;
 import io.github.schntgaispock.gastronomicon.core.slimefun.GastroStacks;
 import io.github.schntgaispock.gastronomicon.util.ChunkPDC;
@@ -123,7 +124,7 @@ public class GreenHouse extends AContainer {
                 }
 
                 if (!hasGlassRoof(b)) {
-                    Gastronomicon.sendMessage(p, "&cYou need to place a Glass block above this!");
+                    Gastronomicon.sendMessage(p, "&c" + Lang.get("messages.greenhouse_missing_glass"));
                     return false;
                 }
 

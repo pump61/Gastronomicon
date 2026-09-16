@@ -19,6 +19,7 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.inventory.ItemStack;
 
 import io.github.schntgaispock.gastronomicon.Gastronomicon;
+import io.github.schntgaispock.gastronomicon.core.Lang;
 import io.github.schntgaispock.gastronomicon.api.recipes.GastroRecipe;
 import io.github.schntgaispock.gastronomicon.core.slimefun.GastroGroups;
 import io.github.schntgaispock.gastronomicon.core.slimefun.GastroStacks;
@@ -119,7 +120,7 @@ public class CoffeeMachine extends GastroWorkstation
     protected void setup(BlockMenuPreset preset) {
         super.setup(preset);
         preset.addItem(CRAFT_BUTTON_SLOT, GastroStacks.MENU_START_BUTTON, ChestMenuUtils.getEmptyClickHandler());
-        addRecipeBookButton(preset, RECIPE_BOOK_SLOT, "Coffee Machine Recipes");
+        addRecipeBookButton(preset, RECIPE_BOOK_SLOT, Lang.get("menu.recipe_book_title.coffee_machine"));
     }
 
     @Override
@@ -132,7 +133,7 @@ public class CoffeeMachine extends GastroWorkstation
         final int water = ChunkPDC.getOrCreateDefault(b, getWaterKey(), 0);
         if (water < mbPerBrew) {
             if (sendMessage) {
-                Gastronomicon.sendMessage(p, "&eNot enough water!");
+                Gastronomicon.sendMessage(p, "&e" + Lang.get("messages.not_enough_water"));
             }
             return false;
         }
@@ -143,10 +144,10 @@ public class CoffeeMachine extends GastroWorkstation
     private void updateWaterLevelDisplay(BlockMenu menu, Block b) {
         final int water = ChunkPDC.getOrCreateDefault(b, getWaterKey(), 0);
         menu.replaceExistingItem(WATER_LEVEL_SLOT, new CustomItemStack(Material.LIGHT_BLUE_STAINED_GLASS_PANE,
-            "&bWater: &f" + water + " &7/ &f" + waterCapacity + " &7mB",
-            "",
-            "&7Shift + Right-click with a water",
-            "&7bucket or water bottle to fill"));
+            "&b" + Lang.get("menu.water_level.name")
+                .replace("{water}", String.valueOf(water))
+                .replace("{capacity}", String.valueOf(waterCapacity)),
+            Lang.getList("menu.water_level.lore").toArray(new String[0])));
     }
 
     @Override
@@ -200,7 +201,7 @@ public class CoffeeMachine extends GastroWorkstation
 
         final GastroRecipe recipe = findRecipe(ingredients, containers, tools, player, menu);
         if (recipe == null) {
-            Gastronomicon.sendMessage(player, "&eUnknown recipe!");
+            Gastronomicon.sendMessage(player, "&e" + Lang.get("messages.unknown_recipe"));
             return;
         }
 

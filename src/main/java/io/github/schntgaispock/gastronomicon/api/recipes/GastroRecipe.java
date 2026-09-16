@@ -13,6 +13,7 @@ import org.bukkit.inventory.ItemStack;
 import io.github.schntgaispock.gastronomicon.api.recipes.components.RecipeComponent;
 import io.github.schntgaispock.gastronomicon.api.recipes.components.RecipeInput;
 import io.github.schntgaispock.gastronomicon.api.recipes.components.SingleRecipeComponent;
+import io.github.schntgaispock.gastronomicon.core.Lang;
 import io.github.schntgaispock.gastronomicon.core.slimefun.recipes.GastroRecipeType;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 import lombok.EqualsAndHashCode;
@@ -36,8 +37,8 @@ public abstract class GastroRecipe {
     @Getter
     @RequiredArgsConstructor
     public enum RecipeShape {
-        SHAPED(new CustomItemStack(Material.CRAFTING_TABLE, "&7This recipe is &fShaped")),
-        SHAPELESS(new CustomItemStack(Material.BARREL, "&7This recipe is &fShapeless"));
+        SHAPED(new CustomItemStack(Material.CRAFTING_TABLE, "&7" + Lang.get("guide.recipe_shape.shaped"))),
+        SHAPELESS(new CustomItemStack(Material.BARREL, "&7" + Lang.get("guide.recipe_shape.shapeless")));
 
         private final ItemStack guideItem;
     }

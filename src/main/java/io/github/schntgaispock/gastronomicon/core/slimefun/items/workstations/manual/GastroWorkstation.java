@@ -20,6 +20,7 @@ import org.bukkit.inventory.ItemStack;
 import io.github.mooy1.infinitylib.core.AddonConfig;
 import io.github.mooy1.infinitylib.machines.MenuBlock;
 import io.github.schntgaispock.gastronomicon.Gastronomicon;
+import io.github.schntgaispock.gastronomicon.core.Lang;
 import io.github.schntgaispock.gastronomicon.api.events.PlayerGastroFoodCraftEvent;
 import io.github.schntgaispock.gastronomicon.api.recipes.GastroRecipe;
 import io.github.schntgaispock.gastronomicon.api.recipes.RecipeRegistry;
@@ -83,10 +84,8 @@ public abstract class GastroWorkstation extends MenuBlock {
     }
 
     private static final ItemStack RECIPE_BOOK_ITEM = new CustomItemStack(Material.KNOWLEDGE_BOOK,
-        "&bRecipe Book",
-        "",
-        "&7Click to view every recipe",
-        "&7you can make here");
+        "&b" + Lang.get("menu.recipe_book.name"),
+        Lang.getList("menu.recipe_book.lore").toArray(new String[0]));
 
     /**
      * Draws a "Recipe Book" button at the given slot that opens a
@@ -181,7 +180,7 @@ public abstract class GastroWorkstation extends MenuBlock {
                 // Otherwise start search
                 recipe = findRecipe(ingredients, containers, tools, player, menu);
                 if (recipe == null) {
-                    Gastronomicon.sendMessage(player, "&eUnknown recipe!");
+                    Gastronomicon.sendMessage(player, "&e" + Lang.get("messages.unknown_recipe"));
                     return false;
                 } else if (lastInputHashAndRecipe.containsKey(menu.getLocation())) {
                     lastInputHashAndRecipe.get(menu.getLocation()).first(hash);

@@ -7,6 +7,7 @@ import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
 import org.bukkit.block.Block;
+import org.bukkit.block.data.Levelled;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
@@ -42,6 +43,7 @@ public class WaterSink extends SimpleSlimefunItem<BlockUseHandler> {
             @Override
             public void onPlayerPlace(org.bukkit.event.block.BlockPlaceEvent e) {
                 ChunkPDC.set(e.getBlock(), GastroKeys.WATER_SINK_FILLED, false);
+                e.getBlock().setType(Material.CAULDRON);
             }
         });
 
@@ -51,6 +53,16 @@ public class WaterSink extends SimpleSlimefunItem<BlockUseHandler> {
                 ChunkPDC.remove(e.getBlock(), GastroKeys.WATER_SINK_FILLED);
             }
         });
+    }
+
+    // Swaps the placed Cauldron block to a full Water Cauldron so the Water
+    // Sink's filled state is visible just by looking at it, no click needed.
+    private static void fillCauldron(Block b) {
+        b.setType(Material.WATER_CAULDRON);
+        if (b.getBlockData() instanceof final Levelled levelled) {
+            levelled.setLevel(levelled.getMaximumLevel());
+            b.setBlockData(levelled);
+        }
     }
 
     @Override
@@ -97,6 +109,7 @@ public class WaterSink extends SimpleSlimefunItem<BlockUseHandler> {
                 case WATER_BUCKET -> {
                     event.cancel();
                     ChunkPDC.set(b, GastroKeys.WATER_SINK_FILLED, true);
+                    fillCauldron(b);
                     if (p.getGameMode() != GameMode.CREATIVE) {
                         inHand.setType(Material.BUCKET);
                     }
@@ -109,6 +122,7 @@ public class WaterSink extends SimpleSlimefunItem<BlockUseHandler> {
                     }
                     event.cancel();
                     ChunkPDC.set(b, GastroKeys.WATER_SINK_FILLED, true);
+                    fillCauldron(b);
                     if (p.getGameMode() != GameMode.CREATIVE) {
                         inHand.setType(Material.GLASS_BOTTLE);
                     }

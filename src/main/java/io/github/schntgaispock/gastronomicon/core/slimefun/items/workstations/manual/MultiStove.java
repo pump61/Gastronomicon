@@ -13,6 +13,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import io.github.schntgaispock.gastronomicon.Gastronomicon;
+import io.github.schntgaispock.gastronomicon.core.Lang;
 import io.github.schntgaispock.gastronomicon.api.recipes.GastroRecipe;
 import io.github.schntgaispock.gastronomicon.api.recipes.MultiStoveRecipe;
 import io.github.schntgaispock.gastronomicon.core.slimefun.recipes.GastroRecipeType;
@@ -68,20 +69,16 @@ public class MultiStove extends GastroWorkstation implements EnergyNetComponent 
 
     public static final ItemStack TEMPERATURE_BUTTON_LOW = new CustomItemStack(
         Material.YELLOW_STAINED_GLASS_PANE,
-        "&7Temperature: &eLow",
-        "",
-        "&bLeft-click &7to increase temperature");
+        "&7" + Lang.get("menu.temperature.name") + ": &e" + Lang.get("menu.temperature.low"),
+        Lang.getList("menu.temperature.lore_low").toArray(new String[0]));
     public static final ItemStack TEMPERATURE_BUTTON_MEDIUM = new CustomItemStack(
         Material.ORANGE_STAINED_GLASS_PANE,
-        "&7Temperature: &6Medium",
-        "",
-        "&bLeft-click &7to increase temperature",
-        "&bRight-click &7to decrease temperature");
+        "&7" + Lang.get("menu.temperature.name") + ": &6" + Lang.get("menu.temperature.medium"),
+        Lang.getList("menu.temperature.lore_medium").toArray(new String[0]));
     public static final ItemStack TEMPERATURE_BUTTON_HIGH = new CustomItemStack(
         Material.RED_STAINED_GLASS_PANE,
-        "&7Temperature: &cHigh",
-        "",
-        "&bRight-click &7to decrease temperature");
+        "&7" + Lang.get("menu.temperature.name") + ": &c" + Lang.get("menu.temperature.high"),
+        Lang.getList("menu.temperature.lore_high").toArray(new String[0]));
     public static final int TEMPERATURE_BUTTON_SLOT = 52;
     public static final int RECIPE_BOOK_SLOT = 44;
     public static final String TEMPERATURE_KEY = "gastronomicon:multi_stove/temperature";
@@ -101,7 +98,7 @@ public class MultiStove extends GastroWorkstation implements EnergyNetComponent 
         super.setup(preset);
 
         preset.drawBackground(TEMPERATURE_BUTTON_LOW, new int[] { TEMPERATURE_BUTTON_SLOT });
-        addRecipeBookButton(preset, RECIPE_BOOK_SLOT, "Multi-Stove Recipes");
+        addRecipeBookButton(preset, RECIPE_BOOK_SLOT, Lang.get("menu.recipe_book_title.multi_stove"));
     }
 
     @Override
@@ -166,7 +163,7 @@ public class MultiStove extends GastroWorkstation implements EnergyNetComponent 
     protected boolean canCraft(BlockMenu menu, Block b, Player p, boolean sendMessage) {
         final int charge = getCharge(b.getLocation());
         if (charge < getEnergyPerUse()) {
-            Gastronomicon.sendMessage(p, "&eNot enough power!");
+            Gastronomicon.sendMessage(p, "&e" + Lang.get("messages.not_enough_power"));
             return false;
         }
 

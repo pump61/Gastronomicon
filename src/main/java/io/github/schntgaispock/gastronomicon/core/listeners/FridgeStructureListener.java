@@ -14,6 +14,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;
 
 import io.github.schntgaispock.gastronomicon.Gastronomicon;
+import io.github.schntgaispock.gastronomicon.core.Lang;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 
@@ -68,7 +69,7 @@ public class FridgeStructureListener implements Listener {
         e.setCancelled(true);
 
         if (module.getRelative(BlockFace.UP).getType() != Material.IRON_BLOCK) {
-            Gastronomicon.sendMessage(e.getPlayer(), "&cThis Fridge is missing its Iron Block!");
+            Gastronomicon.sendMessage(e.getPlayer(), "&c" + Lang.get("messages.fridge_missing_iron_block"));
             return;
         }
 

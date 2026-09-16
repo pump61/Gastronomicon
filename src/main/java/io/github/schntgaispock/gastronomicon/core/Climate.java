@@ -14,12 +14,12 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public enum Climate {
-    DRY(new CustomItemStack(Material.SAND, "&eDry")),
-    TEMPERATE(new CustomItemStack(Material.GRASS_BLOCK, "&eTemperate")),
-    COLD(new CustomItemStack(Material.ICE, "&eCold")),
-    SNOWY(new CustomItemStack(Material.SNOW, "&eSnowy")),
-    NETHER(new CustomItemStack(Material.CRIMSON_NYLIUM, "&eNether")),
-    END(new CustomItemStack(Material.END_STONE, "&eEnd"));
+    DRY(new CustomItemStack(Material.SAND, "&e" + Lang.get("climate.dry"))),
+    TEMPERATE(new CustomItemStack(Material.GRASS_BLOCK, "&e" + Lang.get("climate.temperate"))),
+    COLD(new CustomItemStack(Material.ICE, "&e" + Lang.get("climate.cold"))),
+    SNOWY(new CustomItemStack(Material.SNOW, "&e" + Lang.get("climate.snowy"))),
+    NETHER(new CustomItemStack(Material.CRIMSON_NYLIUM, "&e" + Lang.get("climate.nether"))),
+    END(new CustomItemStack(Material.END_STONE, "&e" + Lang.get("climate.end")));
 
     private final @Getter ItemStack displayItem;
 

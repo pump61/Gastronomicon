@@ -11,6 +11,7 @@ import org.bukkit.inventory.ItemStack;
 import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;
 
 import io.github.schntgaispock.gastronomicon.Gastronomicon;
+import io.github.schntgaispock.gastronomicon.core.Lang;
 import io.github.schntgaispock.gastronomicon.core.slimefun.items.workstations.WaterTank;
 import io.github.schntgaispock.gastronomicon.core.slimefun.recipes.GastroRecipeType;
 import io.github.schntgaispock.gastronomicon.util.ChunkPDC;
@@ -62,7 +63,7 @@ public class Fermenter extends GastroWorkstation implements WaterTank {
     @Override
     protected void setup(BlockMenuPreset preset) {
         super.setup(preset);
-        addRecipeBookButton(preset, RECIPE_BOOK_SLOT, "Fermenter Recipes");
+        addRecipeBookButton(preset, RECIPE_BOOK_SLOT, Lang.get("menu.recipe_book_title.fermenter"));
     }
 
     @Override
@@ -79,10 +80,10 @@ public class Fermenter extends GastroWorkstation implements WaterTank {
 
     private static ItemStack buildWaterLevelItem(int water, int capacity) {
         return new CustomItemStack(Material.LIGHT_BLUE_STAINED_GLASS_PANE,
-            "&bWater: &f" + water + " &7/ &f" + capacity + " &7mB",
-            "",
-            "&7Shift + Right-click with a water",
-            "&7bucket or water bottle to fill");
+            "&b" + Lang.get("menu.water_level.name")
+                .replace("{water}", String.valueOf(water))
+                .replace("{capacity}", String.valueOf(capacity)),
+            Lang.getList("menu.water_level.lore").toArray(new String[0]));
     }
 
     @Override
@@ -94,7 +95,7 @@ public class Fermenter extends GastroWorkstation implements WaterTank {
     protected boolean canCraft(BlockMenu menu, Block b, Player p, boolean sendMessage) {
         final int water = ChunkPDC.getOrCreateDefault(b, GastroKeys.FERMENTER_WATER, 0);
         if (water < getMbPerCraft()) {
-            Gastronomicon.sendMessage(p, "&eNot enough water!");
+            Gastronomicon.sendMessage(p, "&e" + Lang.get("messages.not_enough_water"));
             return false;
         }
 

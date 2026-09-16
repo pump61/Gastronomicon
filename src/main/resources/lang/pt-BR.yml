@@ -3,26 +3,977 @@
 # This file is used automatically when options.language in config.yml is
 # left as "auto" and Slimefun's own default language is pt-BR. Any key left
 # untranslated (or missing) here falls back to lang/en_US.yml, so a partial
-# translation is fine - the values below are still in English as
-# placeholders, ready to be translated.
+# translation is fine.
 #
 # Colors use Minecraft's '&' color codes (e.g. &7 for gray, &b for aqua).
-# Currently only a handful of items are wired up to this file as an example -
-# most item names/lore are still hardcoded in Java and will be migrated over
-# time, so translating this file alone won't yet cover every item.
+# Every item name/lore in the addon is wired up to this file.
 
 items:
   GN_TOASTER:
-    name: "Toaster"
+    name: "Torradeira"
     lore:
-      - "&7Right-click it while holding Sliced Bread"
-      - "&7to feed it - after 5 seconds it"
-      - "&7toasts into a Toasted Bread"
+      - "&7Clique direito nela segurando Pão Fatiado"
+      - "&7para alimentá-la - depois de 5 segundos ela"
+      - "&7torra e vira um Pão Torrado"
   GN_TOASTED_BREAD:
-    name: "Toasted Bread"
+    name: "Pão Torrado"
   GN_COFFEE_MACHINE:
-    name: "Coffee Machine"
+    name: "Máquina de Café"
     lore:
-      - "&7Insert ingredients, a tool and a container,"
-      - "&7then click Start to begin brewing"
-      - "&7Click again to stop early"
+      - "&7Insira os ingredientes, uma ferramenta e um recipiente,"
+      - "&7depois clique em Iniciar para começar a preparar"
+      - "&7Clique novamente para parar antes"
+  GN_KITCHEN_KNIFE:
+    name: "Faca de Cozinha"
+  GN_ROLLING_PIN:
+    name: "Rolo de Massa"
+  GN_BLENDER:
+    name: "Liquidificador"
+  GN_MORTAR_AND_PESTLE:
+    name: "Pilão e Mão de Pilão"
+  GN_PEELER:
+    name: "Descascador"
+  GN_WHISK:
+    name: "Batedor de Arame"
+  GN_DISTILLATION_CHAMBER:
+    name: "Câmara de Destilação"
+  GN_BAKING_TRAY:
+    name: "Assadeira"
+  GN_FRYING_PAN:
+    name: "Frigideira"
+  GN_STEEL_POT:
+    name: "Panela de Aço"
+  GN_STEEL_BOWL:
+    name: "Tigela de Aço"
+  GN_STEEL_WIRE:
+    name: "Fio de Aço"
+  GN_STEEL_SPRING:
+    name: "Mola de Aço"
+  GN_CRAB_TRAP:
+    name: "Armadilha de Caranguejo"
+    lore:
+      - "Usada para pegar caranguejos."
+      - "Coloque no chão,"
+      - "e clique com o botão direito quando partículas brancas aparecerem"
+  GN_HUNTING_TRAP:
+    name: "Armadilha de Caça"
+    lore:
+      - "Usada para pegar o animal especificado."
+      - "Coloque no chão,"
+      - "e clique com o botão direito quando partículas brancas aparecerem"
+  GN_CHEFS_HAT:
+    name: "Chapéu de Chef"
+  GN_WOODEN_SICKLE:
+    name: "Foice de Madeira"
+    lore:
+      - "Aumenta os drops de colheitas"
+  GN_STEEL_SICKLE:
+    name: "Foice de Aço"
+    lore:
+      - "Aumenta os drops de colheitas"
+  GN_REINFORCED_SICKLE:
+    name: "Foice de Liga Reforçada"
+    lore:
+      - "Aumenta os drops de colheitas"
+  GN_CULINARY_WORKBENCH:
+    name: "Mesa de Cozinha"
+  GN_CUTTING_BOARD:
+    name: "Tábua de Corte"
+  GN_MULTI_STOVE:
+    name: "Multi-Fogão"
+  GN_FREEZER:
+    name: "Freezer"
+  GN_MILL:
+    name: "Moinho"
+  GN_FERMENTER:
+    name: "Fermentador"
+    lore:
+      - "&7Use um balde de água ou garrafa de água"
+      - "&eShift + Clique direito"
+      - "&7para encher"
+  GN_LARGE_FERMENTER:
+    name: "Fermentador Grande"
+    lore:
+      - "&7Use um balde de água ou garrafa de água"
+      - "&eShift + Clique direito"
+      - "&7para encher"
+  GN_WATER_SINK:
+    name: "Poço de Água"
+    lore:
+      - "&7Clique direito com um balde de água"
+      - "&7ou garrafa de água para encher"
+      - "&7Depois de cheio, clique direito com um"
+      - "&7balde/garrafa vazio para água infinita"
+  GN_COW_IN_A_JAR:
+    name: "Vaca no Pote"
+    lore:
+      - "&7Clique direito com um balde"
+      - "&7para leite infinito"
+  GN_GREEN_HOUSE:
+    name: "Estufa"
+    lore:
+      - "&7Cultiva automaticamente qualquer semente,"
+      - "&7arbusto ou muda de árvore do Gastronomicon"
+      - "&7Coloque um bloco de vidro logo acima dela"
+      - "&7Alimente com uma semente, terra e fertilizante -"
+      - "&7a semente e a terra permanecem, apenas o"
+      - "&7fertilizante é consumido a cada ciclo"
+      - "&7Farinha de Osso Infernal também funciona e"
+      - "&7dobra as colheitas produzidas"
+  GN_COUNTER:
+    name: "Balcão"
+    lore:
+      - "&7Uma pequena unidade de armazenamento"
+  GN_CABINET:
+    name: "Armário"
+    lore:
+      - "&7Uma grande unidade de armazenamento"
+  GN_FRIDGE_MODULE:
+    name: "Módulo de Geladeira"
+    lore:
+      - "&7Construa com um Bloco de Ferro acima"
+      - "&7e uma Porta de Ferro na frente"
+      - "&7para montar uma Geladeira"
+  GN_CHEF_ANDROID:
+    name: "Andróide Chef"
+  GN_CHEF_ANDROID_TRAINER:
+    name: "Treinador de Andróide Chef"
+  GN_FISHING_NET_I:
+    name: "Rede de Pesca"
+  GN_FISHING_NET_II:
+    name: "Rede de Pesca &7- &eII"
+  GN_FISHING_NET_III:
+    name: "Rede de Pesca &7- &eIII"
+  GN_ELECTRIC_KITCHEN_I:
+    name: "Cozinha Elétrica"
+  GN_ELECTRIC_KITCHEN_II:
+    name: "Cozinha Elétrica &7- &eII"
+  GN_ELECTRIC_KITCHEN_III:
+    name: "Cozinha Elétrica &7- &eIII"
+  GN_RICE:
+    name: "Arroz"
+  GN_QUINOA:
+    name: "Quinoa"
+  GN_OATS:
+    name: "Aveia"
+  GN_SOYBEANS:
+    name: "Soja"
+  GN_BARLEY:
+    name: "Cevada"
+  GN_BARLEY_SEEDS:
+    name: "Sementes de Cevada"
+  GN_RYE:
+    name: "Centeio"
+  GN_RYE_SEEDS:
+    name: "Sementes de Centeio"
+  GN_SORGHUM:
+    name: "Sorgo"
+  GN_SORGHUM_SEEDS:
+    name: "Sementes de Sorgo"
+  GN_TURNIP:
+    name: "Nabo"
+  GN_TURNIP_SEEDS:
+    name: "Sementes de Nabo"
+  GN_SQUASH:
+    name: "Abóbora"
+  GN_SQUASH_SEEDS:
+    name: "Sementes de Abóbora"
+  GN_CELERY:
+    name: "Salsão"
+  GN_BOK_CHOY:
+    name: "Couve Chinesa"
+  GN_BOK_CHOY_SEEDS:
+    name: "Sementes de Couve Chinesa"
+  GN_BROCCOLI:
+    name: "Brócolis"
+  GN_BROCCOLI_SEEDS:
+    name: "Sementes de Brócolis"
+  GN_CUCUMBER:
+    name: "Pepino"
+  GN_CUCUMBER_SEEDS:
+    name: "Sementes de Pepino"
+  GN_BASIL:
+    name: "Manjericão"
+  GN_BASIL_SEEDS:
+    name: "Sementes de Manjericão"
+  GN_SPINACH:
+    name: "Espinafre"
+  GN_SPINACH_SEEDS:
+    name: "Sementes de Espinafre"
+  GN_BRUSSLES_SPROUTS:
+    name: "Couve de Bruxelas"
+  GN_MINT:
+    name: "Hortelã"
+  GN_MINT_SEEDS:
+    name: "Sementes de Hortelã"
+  GN_CHILI_PEPPER:
+    name: "Pimenta"
+  GN_CHILI_PEPPER_SEEDS:
+    name: "Sementes de Pimenta"
+  GN_PARSLEY:
+    name: "Salsinha"
+  GN_PARSLEY_SEEDS:
+    name: "Sementes de Salsinha"
+  GN_CASSAVA:
+    name: "Mandioca"
+  GN_LENTILS:
+    name: "Lentilhas"
+  GN_PEANUTS:
+    name: "Amendoins"
+  GN_BEANS:
+    name: "Feijão"
+  GN_PEAS:
+    name: "Ervilhas"
+  GN_ASPARAGUS:
+    name: "Aspargos"
+  GN_ASPARAGUS_SEEDS:
+    name: "Sementes de Aspargos"
+  GN_GREEN_ONION:
+    name: "Cebolinha"
+  GN_GREEN_ONION_SEEDS:
+    name: "Sementes de Cebolinha"
+  GN_CAULIFLOWER:
+    name: "Couve-flor"
+  GN_CAULIFLOWER_SEEDS:
+    name: "Sementes de Couve-flor"
+  GN_AVOCADO:
+    name: "Abacate"
+  GN_AVOCADO_PIT:
+    name: "Caroço de Abacate"
+  GN_TURMERIC:
+    name: "Cúrcuma"
+  GN_CUMIN_SEEDS:
+    name: "Sementes de Cominho"
+  GN_RED_BEANS:
+    name: "Feijão Vermelho"
+  GN_CANTALOUPE:
+    name: "Melão Cantalupo"
+  GN_CANTALOUPE_SEEDS:
+    name: "Sementes de Melão Cantalupo"
+  GN_HONEYDEW_MELON:
+    name: "Melão-de-Mel"
+  GN_HONEYDEW_MELON_SEEDS:
+    name: "Sementes de Melão-de-Mel"
+  GN_SESAME_SEEDS:
+    name: "Sementes de Gergelim"
+  GN_VANILLA_BEANS:
+    name: "Favas de Baunilha"
+  GN_VANILLA_PLANT:
+    name: "Planta de Baunilha"
+  GN_LYCHEE:
+    name: "Lichia"
+  GN_LYCHEE_SAPLING:
+    name: "Muda de Lichia"
+    lore:
+      - "&7Plante isso na Estufa"
+  GN_BANANA:
+    name: "Banana"
+  GN_BANANA_SAPLING:
+    name: "Muda de Banana"
+    lore:
+      - "&7Plante isso na Estufa"
+  GN_COFFEE_BEANS:
+    name: "Grãos de Café"
+  GN_COFFEE_SAPLING:
+    name: "Muda de Café"
+    lore:
+      - "&7Plante isso na Estufa"
+  GN_TOMATO:
+    name: "Tomate"
+  GN_TOMATO_SEEDS:
+    name: "Sementes de Tomate"
+    lore:
+      - "&7Plante isso na Estufa"
+  GN_LETTUCE:
+    name: "Alface"
+  GN_LETTUCE_SEEDS:
+    name: "Sementes de Alface"
+    lore:
+      - "&7Plante isso na Estufa"
+  GN_GARLIC:
+    name: "Alho"
+  GN_GARLIC_SEEDS:
+    name: "Sementes de Alho"
+    lore:
+      - "&7Plante isso na Estufa"
+  GN_ONION:
+    name: "Cebola"
+  GN_ONION_SEEDS:
+    name: "Sementes de Cebola"
+    lore:
+      - "&7Plante isso na Estufa"
+  GN_CORN:
+    name: "Milho"
+  GN_CORN_SEEDS:
+    name: "Sementes de Milho"
+    lore:
+      - "&7Plante isso na Estufa"
+  GN_CILANTRO:
+    name: "Coentro"
+  GN_CILANTRO_SEEDS:
+    name: "Sementes de Coentro"
+    lore:
+      - "&7Plante isso na Estufa"
+  GN_CURRY_LEAF:
+    name: "Folha de Curry"
+  GN_CURRY_LEAF_SEEDS:
+    name: "Sementes de Folha de Curry"
+    lore:
+      - "&7Plante isso na Estufa"
+  GN_GRAPE:
+    name: "Uva"
+  GN_GRAPE_SEEDS:
+    name: "Sementes de Uva"
+    lore:
+      - "&7Plante isso na Estufa"
+  GN_TEA_LEAF:
+    name: "Folha de Chá"
+  GN_TEA_LEAF_SEEDS:
+    name: "Sementes de Folha de Chá"
+    lore:
+      - "&7Plante isso na Estufa"
+  GN_ORANGE:
+    name: "Laranja"
+  GN_ORANGE_SEEDS:
+    name: "Muda de Laranja"
+    lore:
+      - "&7Plante isso na Estufa"
+  GN_LEMON:
+    name: "Limão"
+  GN_LEMON_SEEDS:
+    name: "Muda de Limão"
+    lore:
+      - "&7Plante isso na Estufa"
+  GN_PINEAPPLE:
+    name: "Abacaxi"
+  GN_PINEAPPLE_SEEDS:
+    name: "Sementes de Abacaxi"
+    lore:
+      - "&7Plante isso na Estufa"
+  GN_CHERRY:
+    name: "Cereja"
+  GN_CHERRY_SEEDS:
+    name: "Muda de Cereja"
+    lore:
+      - "&7Plante isso na Estufa"
+  GN_PEACH:
+    name: "Pêssego"
+  GN_PEACH_SEEDS:
+    name: "Muda de Pêssego"
+    lore:
+      - "&7Plante isso na Estufa"
+  GN_COCONUT:
+    name: "Coco"
+  GN_COCONUT_SEEDS:
+    name: "Muda de Coco"
+    lore:
+      - "&7Plante isso na Estufa"
+  GN_BLUEBERRY:
+    name: "Mirtilo"
+  GN_BLUEBERRY_SEEDS:
+    name: "Sementes de Arbusto de Mirtilo"
+    lore:
+      - "&7Plante isso na Estufa"
+  GN_CRANBERRY:
+    name: "Cranberry"
+  GN_CRANBERRY_SEEDS:
+    name: "Sementes de Arbusto de Cranberry"
+    lore:
+      - "&7Plante isso na Estufa"
+  GN_STRAWBERRY:
+    name: "Morango"
+  GN_STRAWBERRY_SEEDS:
+    name: "Sementes de Arbusto de Morango"
+    lore:
+      - "&7Plante isso na Estufa"
+  GN_RASPBERRY:
+    name: "Framboesa"
+  GN_RASPBERRY_SEEDS:
+    name: "Sementes de Arbusto de Framboesa"
+    lore:
+      - "&7Plante isso na Estufa"
+  GN_COWBERRY:
+    name: "Airela"
+  GN_COWBERRY_SEEDS:
+    name: "Sementes de Arbusto de Airela"
+    lore:
+      - "&7Plante isso na Estufa"
+  GN_FIDDLEHEADS:
+    name: "Brotos de Samambaia"
+  GN_TRUFFLE:
+    name: "Trufa"
+  GN_ENOKI_MUSHROOMS:
+    name: "Cogumelos Enoki"
+  GN_KING_OYSTER_MUSHROOM:
+    name: "Cogumelo Rei-Ostra"
+  GN_BUTTON_MUSHROOM:
+    name: "Cogumelo Champignon"
+  GN_CLAM:
+    name: "Marisco"
+  GN_RAW_CHEVON:
+    name: "Carne de Cabra Crua"
+  GN_COOKED_CHEVON:
+    name: "Carne de Cabra Cozida"
+  GN_SALMON_ROE:
+    name: "Ovas de Salmão"
+  GN_GUARDIAN_FIN:
+    name: "Barbatana de Guardião"
+  GN_RAW_SQUID:
+    name: "Lula Crua"
+  GN_COOKED_SQUID:
+    name: "Lula Cozida"
+  GN_RAW_MACKEREL:
+    name: "Cavala Crua"
+  GN_COOKED_MACKEREL:
+    name: "Cavala Cozida"
+  GN_RAW_EEL:
+    name: "Enguia Crua"
+  GN_COOKED_EEL:
+    name: "Enguia Cozida"
+  GN_RAW_TROUT:
+    name: "Truta Crua"
+  GN_COOKED_TROUT:
+    name: "Truta Cozida"
+  GN_RAW_BASS:
+    name: "Robalo Cru"
+  GN_COOKED_BASS:
+    name: "Robalo Cozido"
+  GN_RAW_CARP:
+    name: "Carpa Crua"
+  GN_COOKED_CARP:
+    name: "Carpa Cozida"
+  GN_RAW_PIKE:
+    name: "Lúcio Cru"
+  GN_COOKED_PIKE:
+    name: "Lúcio Cozido"
+  GN_RAW_TUNA:
+    name: "Atum Cru"
+  GN_COOKED_TUNA:
+    name: "Atum Cozido"
+  GN_SHRIMP:
+    name: "Camarão"
+  GN_CRAB:
+    name: "Caranguejo"
+  GN_RAW_TURKEY:
+    name: "Peru Cru"
+  GN_COOKED_TURKEY:
+    name: "Peru Cozido"
+  GN_COOKED_RICE:
+    name: "Arroz Cozido"
+  GN_BARLEY_FLOUR:
+    name: "Farinha de Cevada"
+  GN_SORGHUM_FLOUR:
+    name: "Farinha de Sorgo"
+  GN_RYE_FLOUR:
+    name: "Farinha de Centeio"
+  GN_DOUGH:
+    name: "Massa"
+  GN_TOAST:
+    name: "Torrada"
+  GN_NAAN_BREAD:
+    name: "Pão Naan"
+  GN_SLICED_BREAD:
+    name: "Pão Fatiado"
+  GN_PEANUT_BUTTER:
+    name: "Manteiga de Amendoim"
+  GN_FRIED_EGG:
+    name: "Ovo Frito"
+  GN_HARD_BOILED_EGG:
+    name: "Ovo Cozido"
+  GN_SCRAMBLED_EGGS:
+    name: "Ovos Mexidos"
+  GN_CUSTARD:
+    name: "Creme de Confeiteiro"
+  GN_CARAMEL:
+    name: "Caramelo"
+  GN_MARMALADE:
+    name: "Geleia de Laranja"
+  GN_KETCHUP:
+    name: "Ketchup"
+  GN_PULLED_PORK:
+    name: "Carne de Porco Desfiada"
+  GN_GROUND_BEEF:
+    name: "Carne Moída"
+  GN_BAKED_BEANS:
+    name: "Feijão Assado"
+  GN_MISO:
+    name: "Missô"
+  GN_TOFU:
+    name: "Tofu"
+  GN_SOY_SAUCE:
+    name: "Molho de Soja"
+  GN_TURMERIC_POWDER:
+    name: "Cúrcuma em Pó"
+  GN_RED_BEAN_PASTE:
+    name: "Pasta de Feijão Vermelho"
+  GN_TAPIOCA_STARCH:
+    name: "Amido de Tapioca"
+  GN_TAPIOCA_PEARLS:
+    name: "Pérolas de Tapioca"
+  GN_BACON:
+    name: "Bacon"
+  GN_SLICED_SALMON:
+    name: "Salmão Fatiado"
+  GN_MAYO:
+    name: "Maionese"
+  GN_BBQ_SAUCE:
+    name: "Molho Barbecue"
+  GN_YEAST:
+    name: "Fermento"
+  GN_BROWN_SUGAR:
+    name: "Açúcar Mascavo"
+  GN_COFFEE_CUP:
+    name: "Xícara de Café"
+  GN_PBJ_SANDWICH:
+    name: "Sanduíche de Pasta de Amendoim com Geleia"
+  GN_MARMALADE_SANDWICH:
+    name: "Sanduíche de Geleia de Laranja"
+  GN_BAKED_BEANS_AND_TOAST:
+    name: "Feijão Assado com Torrada"
+  GN_AVOCADO_TOAST:
+    name: "Torrada com Abacate"
+  GN_TUNA_SANDWICH:
+    name: "Sanduíche de Atum"
+  GN_BREAKFAST_SANDWICH:
+    name: "Sanduíche de Café da Manhã"
+  GN_HAM_SANDWICH:
+    name: "Sanduíche de Presunto"
+  GN_EGG_SALAD_SANDWICH:
+    name: "Sanduíche de Salada de Ovo"
+  GN_ROAST_BEEF_SANDWICH:
+    name: "Sanduíche de Rosbife"
+  GN_GREEK_SALAD:
+    name: "Salada Grega"
+  GN_CAESAR_SALAD:
+    name: "Salada Caesar"
+  GN_FIDDLEHEAD_SALAD:
+    name: "Salada de Brotos de Samambaia"
+  GN_PAN_SEARED_SALMON:
+    name: "Salmão Grelhado"
+  GN_FRIED_SHRIMP:
+    name: "Camarão Frito"
+  GN_TEMPURA_SHRIMP:
+    name: "Camarão à Tempura"
+  GN_TEMPURA_BROCCOLI:
+    name: "Brócolis à Tempura"
+  GN_FRIED_CALAMARI:
+    name: "Lula Frita"
+  GN_CHICKEN_PESTO_PASTA:
+    name: "Macarrão de Frango ao Pesto"
+  GN_SQUID_INK_PASTA:
+    name: "Macarrão com Tinta de Lula"
+  GN_GLOWING_SQUID_INK_PASTA:
+    name: "Macarrão com Tinta de Lula Brilhante"
+  GN_TUNA_CASSEROLE:
+    name: "Caçarola de Atum"
+  GN_CHICKEN_RAVIOLI:
+    name: "Ravióli de Frango"
+  GN_MUSHROOM_RAVIOLI:
+    name: "Ravióli de Cogumelo"
+  GN_OATMEAL:
+    name: "Mingau de Aveia"
+  GN_BARLEY_PORRIDGE:
+    name: "Mingau de Cevada"
+  GN_CONGEE:
+    name: "Congee"
+  GN_CHICKEN_SOUP:
+    name: "Sopa de Frango"
+  GN_CHICKEN_AND_QUINOA_SOUP:
+    name: "Sopa de Frango com Quinoa"
+  GN_CHICKEN_NOODLE_SOUP:
+    name: "Sopa de Frango com Macarrão"
+  GN_CHICKEN_NOODLE_SOUP_WITH_BOK_CHOY:
+    name: "Sopa de Frango com Macarrão e Couve Chinesa"
+  GN_SPLIT_PEA_SOUP:
+    name: "Sopa de Ervilha"
+  GN_HAM_AND_SPLIT_PEA_SOUP:
+    name: "Sopa de Ervilha com Presunto"
+  GN_LENTIL_SOUP:
+    name: "Sopa de Lentilha"
+  GN_BEEF_AND_LENTIL_SOUP:
+    name: "Sopa de Lentilha com Carne"
+  GN_CARROT_SOUP:
+    name: "Sopa de Cenoura"
+  GN_MUSHROOM_BARLEY_SOUP:
+    name: "Sopa de Cevada com Cogumelo"
+  GN_CHICKEN_BARLEY_SOUP:
+    name: "Sopa de Cevada com Frango"
+  GN_BEEF_BARLEY_SOUP:
+    name: "Sopa de Cevada com Carne"
+  GN_CREAM_OF_MUSHROOM_SOUP:
+    name: "Creme de Cogumelo"
+  GN_CREAM_OF_BROCCOLI_SOUP:
+    name: "Creme de Brócolis"
+  GN_CREAM_OF_ASPARAGUS_SOUP:
+    name: "Creme de Aspargos"
+  GN_CREAM_OF_CAULIFLOWER_SOUP:
+    name: "Creme de Couve-flor"
+  GN_MISO_SOUP:
+    name: "Sopa de Missô"
+  GN_GUARDIAN_FIN_SOUP:
+    name: "Sopa de Barbatana de Guardião"
+  GN_BROCCOLI_CHOWDER:
+    name: "Chowder de Brócolis"
+  GN_SALMON_CHOWDER:
+    name: "Chowder de Salmão"
+  GN_POTATO_CHOWDER:
+    name: "Chowder de Batata"
+  GN_CORN_CHOWDER:
+    name: "Chowder de Milho"
+  GN_BEEF_STEW:
+    name: "Ensopado de Carne"
+  GN_CLAM_STEW:
+    name: "Ensopado de Marisco"
+  GN_CRAB_HOTPOT:
+    name: "Hotpot de Caranguejo"
+  GN_BBQ_STEAK:
+    name: "Bife Barbecue"
+  GN_BBQ_PORK:
+    name: "Porco Barbecue"
+  GN_BBQ_CHICKEN:
+    name: "Frango Barbecue"
+  GN_BBQ_MUTTON:
+    name: "Carneiro Barbecue"
+  GN_BUTTER_CHICKEN:
+    name: "Frango na Manteiga"
+  GN_BUTTER_CHICKEN_WITH_NAAN_BREAD:
+    name: "Frango na Manteiga com Pão Naan"
+  GN_SHRIMP_FRIED_RICE:
+    name: "Arroz Frito com Camarão"
+  GN_CURRY_RICE:
+    name: "Arroz ao Curry"
+  GN_RICE_OMELETTE:
+    name: "Omelete de Arroz"
+  GN_RICE_BALL:
+    name: "Bolinho de Arroz"
+  GN_BEEF_UDON:
+    name: "Udon de Carne"
+  GN_CHICKEN_UDON:
+    name: "Udon de Frango"
+  GN_VEGETABLE_UDON:
+    name: "Udon de Vegetais"
+  GN_STIR_FRY_NOODLES:
+    name: "Macarrão Refogado"
+  GN_SHRIMP_DUMPLINGS:
+    name: "Dumplings de Camarão"
+  GN_CHICKEN_POTSTICKERS:
+    name: "Guiozas de Frango"
+  GN_BEEF_POTSTICKERS:
+    name: "Guiozas de Carne"
+  GN_PIEROGIES:
+    name: "Pierogis"
+  GN_BACON_PIEROGIES:
+    name: "Pierogis de Bacon"
+  GN_CUSTARD_BUNS:
+    name: "Pãezinhos de Creme"
+  GN_RED_BEAN_BUNS:
+    name: "Pãezinhos de Feijão Vermelho"
+  GN_TAIYAKI:
+    name: "Taiyaki"
+  GN_TEMPURA_SHRIMP_ROLL:
+    name: "Rolinho de Camarão à Tempura"
+  GN_DYNAMITE_ROLL:
+    name: "Rolinho Dinamite"
+  GN_KAPPA_ROLL:
+    name: "Rolinho Kappa"
+  GN_NIGIRI:
+    name: "Nigiri"
+  GN_CALIFORNIA_ROLL:
+    name: "Rolinho Califórnia"
+  GN_SALMON_ROE_SUSHI_ROLL:
+    name: "Rolinho de Sushi com Ovas de Salmão"
+  GN_RED_BEAN_GLUTINOUS_RICE_BALLS:
+    name: "Bolinhos de Arroz Glutinoso com Feijão Vermelho"
+  GN_PEANUT_GLUTINOUS_RICE_BALLS:
+    name: "Bolinhos de Arroz Glutinoso com Amendoim"
+  GN_SESAME_GLUTINOUS_RICE_BALLS:
+    name: "Bolinhos de Arroz Glutinoso com Gergelim"
+  GN_MASHED_POTATOES:
+    name: "Purê de Batata"
+  GN_MASHED_TURNIPS:
+    name: "Purê de Nabo"
+  GN_FISH_AND_CHIPS:
+    name: "Peixe com Batatas Fritas"
+  GN_TURKEY_ROAST:
+    name: "Peru Assado"
+  GN_CHOCOLATE_TRUFFLE:
+    name: "Trufa de Chocolate"
+  GN_DOUBLE_CHOCOLATE_MUFFIN:
+    name: "Muffin Duplo Chocolate"
+  GN_CARROT_MUFFIN:
+    name: "Muffin de Cenoura"
+  GN_CRANBERRY_MUFFIN:
+    name: "Muffin de Cranberry"
+  GN_RAISIN_MUFFIN:
+    name: "Muffin de Passas"
+  GN_VANILLA_ICE_CREAM:
+    name: "Sorvete de Baunilha"
+  GN_CHOCOLATE_ICE_CREAM:
+    name: "Sorvete de Chocolate"
+  GN_MINT_CHOCOLATE_ICE_CREAM:
+    name: "Sorvete de Menta com Chocolate"
+  GN_COOKIE_DOUGH_ICE_CREAM:
+    name: "Sorvete de Massa de Biscoito"
+  GN_PEANUT_BUTTER_ICE_CREAM:
+    name: "Sorvete de Manteiga de Amendoim"
+  GN_RED_BEAN_ICE_CREAM:
+    name: "Sorvete de Feijão Vermelho"
+  GN_GREEN_TEA_ICE_CREAM:
+    name: "Sorvete de Chá Verde"
+  GN_STRAWBERRY_ICE_CREAM:
+    name: "Sorvete de Morango"
+  GN_BLUEBERRY_ICE_CREAM:
+    name: "Sorvete de Mirtilo"
+  GN_CRANBERRY_ICE_CREAM:
+    name: "Sorvete de Cranberry"
+  GN_COWBERRY_ICE_CREAM:
+    name: "Sorvete de Airela"
+  GN_COCONUT_ICE_CREAM:
+    name: "Sorvete de Coco"
+  GN_CHERRY_ICE_CREAM:
+    name: "Sorvete de Cereja"
+  GN_RASPBERRY_ICE_CREAM:
+    name: "Sorvete de Framboesa"
+  GN_CARAMEL_ICE_CREAM:
+    name: "Sorvete de Caramelo"
+  GN_ORANGE_ICE_CREAM:
+    name: "Sorvete de Laranja"
+  GN_PEACH_ICE_CREAM:
+    name: "Sorvete de Pêssego"
+  GN_PINEAPPLE_ICE_CREAM:
+    name: "Sorvete de Abacaxi"
+  GN_CHORUS_ICE_CREAM:
+    name: "Sorvete de Fruta Chorus"
+  GN_SHAVED_ICE:
+    name: "Raspadinha"
+  GN_STRAWBERRY_SHAVED_ICE:
+    name: "Raspadinha de Morango"
+  GN_BANANA_SHAVED_ICE:
+    name: "Raspadinha de Banana"
+  GN_LEMON_SHAVED_ICE:
+    name: "Raspadinha de Limão"
+  GN_CANDY_APPLE:
+    name: "Maçã do Amor"
+  GN_DONUT:
+    name: "Donut"
+  GN_HONEY_DIP_DONUT:
+    name: "Donut de Mel"
+  GN_GOLDEN_CHOCOLATE_DONUT:
+    name: "Donut Dourado de Chocolate"
+  GN_STRAWBERRY_CHEESECAKE:
+    name: "Cheesecake de Morango"
+  GN_STRAWBERRY_CUPCAKE:
+    name: "Cupcake de Morango"
+  GN_LEMON_TART:
+    name: "Torta de Limão"
+  GN_CHORUS_PIE:
+    name: "Torta de Chorus"
+  GN_POPPED_SORGHUM:
+    name: "Sorgo Estourado"
+  GN_ENCHANTED_GOLDEN_CARROT:
+    name: "Cenoura Dourada Encantada"
+  GN_ENCHANTED_GLISTERING_MELON_SLICE:
+    name: "Fatia de Melão Brilhante Encantada"
+  GN_V7:
+    name: "V7"
+  GN_BUBBLE_MILK_TEA:
+    name: "Bubble Tea de Leite"
+  GN_CANTALOUPE_BUBBLE_TEA:
+    name: "Bubble Tea de Melão Cantalupo"
+  GN_HONEYDEW_MELON_BUBBLE_TEA:
+    name: "Bubble Tea de Melão-de-Mel"
+  GN_APPLE_BUBBLE_TEA:
+    name: "Bubble Tea de Maçã"
+  GN_RED_WINE:
+    name: "Vinho Tinto"
+  GN_BEER:
+    name: "Cerveja"
+  GN_APPLE_CIDER:
+    name: "Cidra de Maçã"
+  GN_RICE_WINE:
+    name: "Vinho de Arroz"
+  GN_VODKA:
+    name: "Vodca"
+  GN_RUM:
+    name: "Rum"
+  GN_WHISKEY:
+    name: "Uísque"
+
+menu:
+  ingredient_border: "Ingrediente"
+  container_border: "Recipiente"
+  tool_border: "Ferramenta"
+  output_border: "Saída"
+  craft_button: "Clique para Fabricar"
+  food_border:
+    name: "Slot de Comida"
+    lore:
+      - ""
+      - "Coloque a comida abaixo"
+  train_button: "Clique para Treinar"
+  input_border: "Entrada"
+  android_border: "Andróide Chef"
+  not_enough_energy: "Energia Insuficiente"
+  no_android: "Sem Andróide"
+  incorrect_recipe: "Receita Inválida"
+  not_waterlogged: "Fora da Água"
+  start_button: "Clique para Iniciar"
+  stop_button: "Clique para Parar"
+  greenhouse_stopped: "Parada"
+  no_greenhouse_roof: "Falta o Vidro"
+  seed_input: "Entrada de Muda"
+  soil_input: "Entrada de Terra"
+  fertilizer_input: "Entrada de Fertilizante"
+  recipe_book:
+    name: "Livro de Receitas"
+    lore:
+      - "Clique para ver todas as receitas"
+      - "que você pode fazer aqui"
+  previous_page: "Página Anterior"
+  next_page: "Próxima Página"
+  page_info: "Página {page} / {total}"
+  back: "Voltar"
+  return_to_machine: "Voltar para a Máquina"
+  recipe_book_title:
+    cutting_board: "Receitas da Tábua de Corte"
+    culinary_workbench: "Receitas da Mesa de Cozinha"
+    freezer: "Receitas do Freezer"
+    multi_stove: "Receitas do Multi-Fogão"
+    fermenter: "Receitas do Fermentador"
+    mill: "Receitas do Moinho"
+    coffee_machine: "Receitas da Máquina de Café"
+  water_level:
+    name: "Água: &f{water} &7/ &f{capacity} &7mB"
+    lore:
+      - ""
+      - "&7Shift + Clique direito com um balde"
+      - "&7ou garrafa de água para encher"
+  temperature:
+    name: "Temperatura"
+    low: "Baixa"
+    medium: "Média"
+    high: "Alta"
+    lore_low:
+      - ""
+      - "&bClique esquerdo &7para aumentar a temperatura"
+    lore_medium:
+      - ""
+      - "&bClique esquerdo &7para aumentar a temperatura"
+      - "&bClique direito &7para diminuir a temperatura"
+    lore_high:
+      - ""
+      - "&bClique direito &7para diminuir a temperatura"
+
+guide:
+  category:
+    tools: "Ferramentas"
+    basic_kitchen: "Cozinha Básica"
+    storage_deco: "Armazenamento e Decoração"
+    electric_kitchen: "Cozinha Elétrica"
+    ingredients: "Ingredientes"
+    food: "Comida"
+    gourmet: "Gourmet"
+  recipe_type:
+    destroy_block:
+      name: "Destruir Bloco"
+      lore:
+        - "Destrua o bloco especificado"
+        - "para obter este item"
+    harvest_crop:
+      name: "Colher Plantação"
+      lore:
+        - "Colha a plantação especificada"
+        - "para obter este item"
+    kill_mob:
+      name: "Matar Mob"
+      lore:
+        - "Mate o mob especificado"
+        - "com chance de dropar este item"
+    trap:
+      name: "Armadilha"
+      lore:
+        - "Capture com a armadilha especificada"
+        - "para obter este item"
+  how_to_craft:
+    culinary_workbench:
+      name: "Mesa de Cozinha"
+      lore:
+        - "Na Mesa de Cozinha,"
+        - "insira a ferramenta e o recipiente especificados"
+        - "para fabricar este item"
+    multi_stove:
+      name: "Multi-Fogão"
+      lore:
+        - "No Multi-Fogão,"
+        - "insira a ferramenta e o recipiente especificados"
+        - "para fabricar este item"
+    freezer:
+      name: "Freezer"
+      lore:
+        - "No Freezer,"
+        - "insira a ferramenta e o recipiente especificados"
+        - "para fabricar este item"
+    mill:
+      name: "Moinho"
+      lore:
+        - "No Moinho,"
+        - "insira a ferramenta e o recipiente especificados"
+        - "para fabricar este item"
+    cutting_board:
+      name: "Tábua de Corte"
+      lore:
+        - "Na Tábua de Corte,"
+        - "insira a ferramenta e o recipiente especificados"
+        - "para fabricar este item"
+    fermenter:
+      name: "Fermentador"
+      lore:
+        - "No Fermentador,"
+        - "insira a ferramenta e o recipiente especificados"
+        - "para fabricar este item"
+    toaster:
+      name: "Torradeira"
+      lore:
+        - "Clique direito na Torradeira"
+        - "segurando o item especificado"
+        - "para fabricar este item"
+    coffee_machine:
+      name: "Máquina de Café"
+      lore:
+        - "Na Máquina de Café,"
+        - "insira a ferramenta e o recipiente especificados"
+        - "e clique em Iniciar para fabricar este item"
+  required_tool: "Ferramenta Necessária"
+  required_container: "Recipiente Necessário"
+  required_biome: "Bioma Necessário"
+  required_environment: "Ambiente Necessário"
+  none: "Nenhum"
+  mob:
+    goat: "Cabra"
+    salmon: "Salmão"
+    guardian: "Guardião"
+    squid: "Lula"
+  drop_on_a_cow: "Derrube em uma Vaca"
+  recipe_shape:
+    shaped: "Essa receita é &fModelada"
+    shapeless: "Essa receita é &fSem Forma"
+
+climate:
+  dry: "Seco"
+  temperate: "Temperado"
+  cold: "Frio"
+  snowy: "Nevado"
+  nether: "Nether"
+  end: "End"
+
+messages:
+  not_enough_water: "Água insuficiente!"
+  not_enough_energy: "Energia insuficiente!"
+  not_enough_power: "Energia insuficiente!"
+  unknown_recipe: "Receita desconhecida!"
+  greenhouse_missing_glass: "Você precisa colocar um bloco de vidro acima disso!"
+  fridge_missing_iron_block: "Essa Geladeira está sem o Bloco de Ferro!"
+  chef_android_trainer:
+    invalid_food: "Um item de comida válido deve ser colocado no slot do meio"
+    output_full: "Slot de saída está cheio!"
+    not_proficient: "Você ainda não tem proficiência suficiente com essa comida! Necessário: {proficiency}/{threshold}"

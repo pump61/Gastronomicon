@@ -5,6 +5,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import io.github.schntgaispock.gastronomicon.Gastronomicon;
+import io.github.schntgaispock.gastronomicon.core.Lang;
 import io.github.schntgaispock.gastronomicon.core.slimefun.recipes.GastroRecipeType;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.core.attributes.EnergyNetComponent;
@@ -31,7 +32,7 @@ public class Freezer extends GastroWorkstation implements EnergyNetComponent {
     @Override
     protected void setup(BlockMenuPreset preset) {
         super.setup(preset);
-        addRecipeBookButton(preset, RECIPE_BOOK_SLOT, "Freezer Recipes");
+        addRecipeBookButton(preset, RECIPE_BOOK_SLOT, Lang.get("menu.recipe_book_title.freezer"));
     }
 
     @Override
@@ -48,7 +49,7 @@ public class Freezer extends GastroWorkstation implements EnergyNetComponent {
     protected boolean canCraft(BlockMenu menu, Block b, Player p, boolean sendMessage) {
         final int charge = getCharge(b.getLocation());
         if (charge < getEnergyPerUse()) {
-            Gastronomicon.sendMessage(p, "&eNot enough energy!");
+            Gastronomicon.sendMessage(p, "&e" + Lang.get("messages.not_enough_energy"));
             return false;
         }
 
