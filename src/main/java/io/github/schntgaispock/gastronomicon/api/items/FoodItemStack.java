@@ -9,6 +9,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import org.bukkit.Material;
 
 import io.github.schntgaispock.gastronomicon.api.food.FoodEffect;
+import io.github.schntgaispock.gastronomicon.core.Lang;
 import io.github.schntgaispock.gastronomicon.util.NumberUtil;
 import io.github.schntgaispock.gastronomicon.util.item.HeadTextures;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
@@ -81,7 +82,7 @@ public class FoodItemStack extends SlimefunItemStack {
 
         if (effects != null && effects.length > 0) {
             fLore.add("");
-            fLore.add("&7Gain upon eating:");
+            fLore.add("&7" + Lang.get("generated.gain_upon_eating"));
             for (FoodEffect effect : effects) {
                 fLore.add("&8‑ " + (isPerfect ? effect.getPerfectDescription() : effect.getDescription()));
             }

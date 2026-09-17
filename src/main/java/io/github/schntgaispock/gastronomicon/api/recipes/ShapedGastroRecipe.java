@@ -41,7 +41,7 @@ public class ShapedGastroRecipe extends GastroRecipe {
             return RecipeMatchResult.NO_MATCH;
         }
 
-        if (!givenTools.containsAll(getTools()))
+        if (!toolsMatch(givenTools, getTools()))
             return RecipeMatchResult.NO_MATCH;
 
         for (int i = 0; i < givenIngredients.length; i++) {

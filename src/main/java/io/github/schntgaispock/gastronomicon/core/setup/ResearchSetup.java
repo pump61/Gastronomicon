@@ -29,10 +29,12 @@ public class ResearchSetup {
             .addItems(
                 GastroStacks.CULINARY_WORKBENCH,
                 GastroStacks.COUNTER,
-                GastroStacks.CABINET)
+                GastroStacks.CABINET,
+                GastroStacks.ARTIFICIAL_BEEHIVE)
             .register();
         GastroResearch.MULTI_STOVE.addItems(GastroStacks.MULTI_STOVE).register();
         GastroResearch.GRAIN_MILL.addItems(GastroStacks.MILL).register();
+        GastroResearch.SOIL_FABRICATOR.addItems(GastroStacks.SOIL_FABRICATOR).register();
         GastroResearch.FREEZER
             .addItems(
                 GastroStacks.FREEZER,

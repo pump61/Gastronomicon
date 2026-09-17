@@ -170,6 +170,8 @@ public class WildHarvestListener implements Listener {
                 GastroStacks.LEMON_SEEDS,
                 GastroStacks.PINEAPPLE_SEEDS,
                 GastroStacks.COCONUT_SEEDS)
+            .addItems(2,
+                GastroStacks.CINNAMON)
             .build();
         final LootTable<ItemStack> TEMPERATE_CLIMATE_GRASS_DROPS = LootTable.builder()
             .addItems(6,
@@ -203,8 +205,7 @@ public class WildHarvestListener implements Listener {
                 GastroStacks.CAULIFLOWER_SEEDS,
                 GastroStacks.AVOCADO_PIT,
                 GastroStacks.TURMERIC,
-                GastroStacks.CUMIN_SEEDS,
-                GastroStacks.VANILLA_PLANT)
+                GastroStacks.CUMIN_SEEDS)
             .addItems(3,
                 GastroStacks.TOMATO_SEEDS,
                 GastroStacks.LETTUCE_SEEDS,
@@ -223,7 +224,8 @@ public class WildHarvestListener implements Listener {
             .addItems(2,
                 GastroStacks.LYCHEE_SAPLING,
                 GastroStacks.BANANA_SAPLING,
-                GastroStacks.COFFEE_SAPLING)
+                GastroStacks.COFFEE_SAPLING,
+                GastroStacks.CINNAMON)
             .build();
         final LootTable<ItemStack> COLD_CLIMATE_GRASS_DROPS = LootTable.builder()
             .addItems(6,
@@ -241,10 +243,13 @@ public class WildHarvestListener implements Listener {
                 GastroStacks.CRANBERRY_SEEDS,
                 GastroStacks.COWBERRY_SEEDS)
             .addItems(2,
-                GastroStacks.LYCHEE_SAPLING)
+                GastroStacks.LYCHEE_SAPLING,
+                GastroStacks.CINNAMON)
             .build();
         final LootTable<ItemStack> SNOWY_CLIMATE_GRASS_DROPS = LootTable.builder()
             .addItems(GastroStacks.RYE_SEEDS)
+            .addItems(2,
+                GastroStacks.CINNAMON)
             .build();
         final LootTable<ItemStack> FERN_DROPS = LootTable.builder()
             .addItems(GastroStacks.FIDDLEHEADS)

@@ -12,17 +12,14 @@ items:
   GN_TOASTER:
     name: "Torradeira"
     lore:
-      - "&7Clique direito nela segurando Pão Fatiado"
-      - "&7para alimentá-la - depois de 5 segundos ela"
-      - "&7torra e vira um Pão Torrado"
+      - "&eClique direito&7 nela segurando Pão Fatiado,"
+      - "&7para obter um Pão Torrado."
   GN_TOASTED_BREAD:
     name: "Pão Torrado"
   GN_COFFEE_MACHINE:
     name: "Máquina de Café"
     lore:
-      - "&7Insira os ingredientes, uma ferramenta e um recipiente,"
-      - "&7depois clique em Iniciar para começar a preparar"
-      - "&7Clique novamente para parar antes"
+      - "&7Nada melhor do que um café quentinho..."
   GN_KITCHEN_KNIFE:
     name: "Faca de Cozinha"
   GN_ROLLING_PIN:
@@ -30,7 +27,7 @@ items:
   GN_BLENDER:
     name: "Liquidificador"
   GN_MORTAR_AND_PESTLE:
-    name: "Pilão e Mão de Pilão"
+    name: "Almofariz e Pilão"
   GN_PEELER:
     name: "Descascador"
   GN_WHISK:
@@ -53,7 +50,7 @@ items:
     name: "Armadilha de Caranguejo"
     lore:
       - "Usada para pegar caranguejos."
-      - "Coloque no chão,"
+      - "Coloque na água,"
       - "e clique com o botão direito quando partículas brancas aparecerem"
   GN_HUNTING_TRAP:
     name: "Armadilha de Caça"
@@ -85,6 +82,16 @@ items:
     name: "Freezer"
   GN_MILL:
     name: "Moinho"
+  GN_SOIL_FABRICATOR:
+    name: "Fabricante de Solo"
+    lore:
+      - "&7Insira Terra, Farinha de Osso e"
+      - "&7qualquer enxada na ferramenta -"
+      - "&7a enxada desgasta normalmente,"
+      - "&7mas nunca é totalmente consumida"
+      - ""
+      - "&7Funciona sozinho, sem precisar"
+      - "&7clicar em nada"
   GN_FERMENTER:
     name: "Fermentador"
     lore:
@@ -100,32 +107,36 @@ items:
   GN_WATER_SINK:
     name: "Poço de Água"
     lore:
-      - "&7Clique direito com um balde de água"
+      - "&eClique direito&7 com um balde de água"
       - "&7ou garrafa de água para encher"
-      - "&7Depois de cheio, clique direito com um"
+      - "&7Depois de cheio, &eclique direito&7 com um"
       - "&7balde/garrafa vazio para água infinita"
   GN_COW_IN_A_JAR:
     name: "Vaca no Pote"
     lore:
-      - "&7Clique direito com um balde"
+      - "&eClique direito&7 com um balde"
       - "&7para leite infinito"
   GN_GREEN_HOUSE:
     name: "Estufa"
     lore:
       - "&7Cultiva automaticamente qualquer semente,"
       - "&7arbusto ou muda de árvore do Gastronomicon"
+      - ""
       - "&7Coloque um bloco de vidro logo acima dela"
-      - "&7Alimente com uma semente, terra e fertilizante -"
+      - ""
+      - "&7Use semente, terra e fertilizante -"
       - "&7a semente e a terra permanecem, apenas o"
-      - "&7fertilizante é consumido a cada ciclo"
-      - "&7Farinha de Osso Infernal também funciona e"
-      - "&7dobra as colheitas produzidas"
+      - "&7fertilizante é consumido a cada ciclo."
   GN_COUNTER:
     name: "Balcão"
     lore:
       - "&7Uma pequena unidade de armazenamento"
   GN_CABINET:
     name: "Armário"
+    lore:
+      - "&7Uma grande unidade de armazenamento"
+  GN_ARTIFICIAL_BEEHIVE:
+    name: "Colmeia Artificial"
     lore:
       - "&7Uma grande unidade de armazenamento"
   GN_FRIDGE_MODULE:
@@ -258,8 +269,8 @@ items:
     name: "Sementes de Gergelim"
   GN_VANILLA_BEANS:
     name: "Favas de Baunilha"
-  GN_VANILLA_PLANT:
-    name: "Planta de Baunilha"
+  GN_CINNAMON:
+    name: "Canela"
   GN_LYCHEE:
     name: "Lichia"
   GN_LYCHEE_SAPLING:
@@ -504,12 +515,16 @@ items:
     name: "Molho de Soja"
   GN_TURMERIC_POWDER:
     name: "Cúrcuma em Pó"
+  GN_COCOA_POWDER:
+    name: "Cacau em Pó"
+  GN_CHOCOLATE:
+    name: "Chocolate"
   GN_RED_BEAN_PASTE:
     name: "Pasta de Feijão Vermelho"
   GN_TAPIOCA_STARCH:
     name: "Amido de Tapioca"
   GN_TAPIOCA_PEARLS:
-    name: "Pérolas de Tapioca"
+    name: "Dadinhos de Tapioca"
   GN_BACON:
     name: "Bacon"
   GN_SLICED_SALMON:
@@ -524,6 +539,16 @@ items:
     name: "Açúcar Mascavo"
   GN_COFFEE_CUP:
     name: "Xícara de Café"
+  GN_CAPPUCCINO:
+    name: "Cappuccino"
+  GN_CAFE_LATTE:
+    name: "Café Latte"
+  GN_HOT_CHOCOLATE:
+    name: "Chocolate Quente"
+  GN_CARAMEL_CHOCOLATE_FRAPPE:
+    name: "Caramelo Frappé com Chocolate"
+  GN_ICED_COFFEE:
+    name: "Café Gelado"
   GN_PBJ_SANDWICH:
     name: "Sanduíche de Pasta de Amendoim com Geleia"
   GN_MARMALADE_SANDWICH:
@@ -542,6 +567,9 @@ items:
     name: "Sanduíche de Salada de Ovo"
   GN_ROAST_BEEF_SANDWICH:
     name: "Sanduíche de Rosbife"
+  GN_PUFFERFISH_SANDWICH:
+    name: "Lanche de Baiacu"
+    lore: "O lanche favorito do superHuxley"
   GN_GREEK_SALAD:
     name: "Salada Grega"
   GN_CAESAR_SALAD:
@@ -706,6 +734,8 @@ items:
     name: "Muffin de Cranberry"
   GN_RAISIN_MUFFIN:
     name: "Muffin de Passas"
+  GN_ICE_ROCKS:
+    name: "Pedras de Gelo"
   GN_VANILLA_ICE_CREAM:
     name: "Sorvete de Baunilha"
   GN_CHOCOLATE_ICE_CREAM:
@@ -824,6 +854,18 @@ menu:
   seed_input: "Entrada de Muda"
   soil_input: "Entrada de Terra"
   fertilizer_input: "Entrada de Fertilizante"
+  fertilizer_input_lore:
+    - "&7Aceita:"
+    - "&7- Farinha de Osso"
+    - "&7- Farinha de Osso Infernal &8(dobra a fruta)"
+    - "&7- Fertilizante do Slimefun &8(até 8 usos por lata)"
+  dirt_input: "Entrada de Terra"
+  bonemeal_input: "Entrada de Farinha de Osso"
+  hoe_input: "Ferramenta"
+  hoe_input_lore:
+    - "&7Aceita qualquer enxada"
+    - "&7Desgasta como uma enxada normal,"
+    - "&7mas nunca é totalmente consumida"
   recipe_book:
     name: "Livro de Receitas"
     lore:
@@ -834,6 +876,7 @@ menu:
   page_info: "Página {page} / {total}"
   back: "Voltar"
   return_to_machine: "Voltar para a Máquina"
+  green_house_fertilizer_uses: "&7Usos restantes: &e{uses}&7/&e{max}"
   recipe_book_title:
     cutting_board: "Receitas da Tábua de Corte"
     culinary_workbench: "Receitas da Mesa de Cozinha"
@@ -846,7 +889,7 @@ menu:
     name: "Água: &f{water} &7/ &f{capacity} &7mB"
     lore:
       - ""
-      - "&7Shift + Clique direito com um balde"
+      - "&eShift + Clique direito&7 com um balde"
       - "&7ou garrafa de água para encher"
   temperature:
     name: "Temperatura"
@@ -866,12 +909,12 @@ menu:
 
 guide:
   category:
-    tools: "Ferramentas"
+    tools: "Utensílios"
     basic_kitchen: "Cozinha Básica"
-    storage_deco: "Armazenamento e Decoração"
-    electric_kitchen: "Cozinha Elétrica"
+    storage_deco: "Armários"
+    electric_kitchen: "Cozinha Energizada"
     ingredients: "Ingredientes"
-    food: "Comida"
+    food: "Comidas"
     gourmet: "Gourmet"
   recipe_type:
     destroy_block:
@@ -977,3 +1020,80 @@ messages:
     invalid_food: "Um item de comida válido deve ser colocado no slot do meio"
     output_full: "Slot de saída está cheio!"
     not_proficient: "Você ainda não tem proficiência suficiente com essa comida! Necessário: {proficiency}/{threshold}"
+
+generated:
+  storage_variant_name_format: "{type} de {material}"
+  water_storage_capacity_suffix: " de capacidade de armazenamento"
+  water_per_craft_suffix: " usados por receita"
+  gain_upon_eating: "Ganha ao comer:"
+
+materials:
+  slab:
+    ACACIA_SLAB: "Acácia"
+    ANDESITE_SLAB: "Andesito"
+    BAMBOO_MOSAIC_SLAB: "Mosaico de Bambu"
+    BAMBOO_SLAB: "Bambu"
+    BIRCH_SLAB: "Bétula"
+    BLACKSTONE_SLAB: "Pedra Negra"
+    BRICK_SLAB: "Tijolo"
+    CHERRY_SLAB: "Cerejeira"
+    CINNABAR_BRICK_SLAB: "Tijolo de Cinábrio"
+    CINNABAR_SLAB: "Cinábrio"
+    COBBLED_DEEPSLATE_SLAB: "Pedregulho de Ardósia Profunda"
+    COBBLESTONE_SLAB: "Pedregulho"
+    CRIMSON_SLAB: "Carmesim"
+    CUT_COPPER_SLAB: "Cobre Cortado"
+    CUT_RED_SANDSTONE_SLAB: "Arenito Vermelho Cortado"
+    CUT_SANDSTONE_SLAB: "Arenito Cortado"
+    DARK_OAK_SLAB: "Carvalho Escuro"
+    DARK_PRISMARINE_SLAB: "Prismarinho Escuro"
+    DEEPSLATE_BRICK_SLAB: "Tijolo de Ardósia Profunda"
+    DEEPSLATE_TILE_SLAB: "Ladrilho de Ardósia Profunda"
+    DIORITE_SLAB: "Diorito"
+    END_STONE_BRICK_SLAB: "Tijolo de Pedra do End"
+    EXPOSED_CUT_COPPER_SLAB: "Cobre Cortado Exposto"
+    GRANITE_SLAB: "Granito"
+    JUNGLE_SLAB: "Selva"
+    MANGROVE_SLAB: "Mangue"
+    MOSSY_COBBLESTONE_SLAB: "Pedregulho Musgoso"
+    MOSSY_STONE_BRICK_SLAB: "Tijolo de Pedra Musgoso"
+    MUD_BRICK_SLAB: "Tijolo de Lama"
+    NETHER_BRICK_SLAB: "Tijolo do Nether"
+    OAK_SLAB: "Carvalho"
+    OXIDIZED_CUT_COPPER_SLAB: "Cobre Cortado Oxidado"
+    PALE_OAK_SLAB: "Carvalho Pálido"
+    PETRIFIED_OAK_SLAB: "Carvalho Petrificado"
+    POLISHED_ANDESITE_SLAB: "Andesito Polido"
+    POLISHED_BLACKSTONE_BRICK_SLAB: "Tijolo de Pedra Negra Polida"
+    POLISHED_BLACKSTONE_SLAB: "Pedra Negra Polida"
+    POLISHED_CINNABAR_SLAB: "Cinábrio Polido"
+    POLISHED_DEEPSLATE_SLAB: "Ardósia Profunda Polida"
+    POLISHED_DIORITE_SLAB: "Diorito Polido"
+    POLISHED_GRANITE_SLAB: "Granito Polido"
+    POLISHED_SULFUR_SLAB: "Enxofre Polido"
+    POLISHED_TUFF_SLAB: "Tufo Polido"
+    PRISMARINE_BRICK_SLAB: "Tijolo de Prismarinho"
+    PRISMARINE_SLAB: "Prismarinho"
+    PURPUR_SLAB: "Púrpur"
+    QUARTZ_SLAB: "Quartzo"
+    RED_NETHER_BRICK_SLAB: "Tijolo Vermelho do Nether"
+    RED_SANDSTONE_SLAB: "Arenito Vermelho"
+    RESIN_BRICK_SLAB: "Tijolo de Resina"
+    SANDSTONE_SLAB: "Arenito"
+    SMOOTH_QUARTZ_SLAB: "Quartzo Liso"
+    SMOOTH_RED_SANDSTONE_SLAB: "Arenito Vermelho Liso"
+    SMOOTH_SANDSTONE_SLAB: "Arenito Liso"
+    SMOOTH_STONE_SLAB: "Pedra Lisa"
+    SPRUCE_SLAB: "Abeto"
+    STONE_BRICK_SLAB: "Tijolo de Pedra"
+    STONE_SLAB: "Pedra"
+    SULFUR_BRICK_SLAB: "Tijolo de Enxofre"
+    SULFUR_SLAB: "Enxofre"
+    TUFF_BRICK_SLAB: "Tijolo de Tufo"
+    TUFF_SLAB: "Tufo"
+    WARPED_SLAB: "Deturpado"
+    WAXED_CUT_COPPER_SLAB: "Cobre Cortado Encerado"
+    WAXED_EXPOSED_CUT_COPPER_SLAB: "Cobre Cortado Exposto Encerado"
+    WAXED_OXIDIZED_CUT_COPPER_SLAB: "Cobre Cortado Oxidado Encerado"
+    WAXED_WEATHERED_CUT_COPPER_SLAB: "Cobre Cortado Desgastado Encerado"
+    WEATHERED_CUT_COPPER_SLAB: "Cobre Cortado Desgastado"

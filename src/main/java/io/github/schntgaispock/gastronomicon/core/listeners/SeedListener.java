@@ -1,5 +1,7 @@
 package io.github.schntgaispock.gastronomicon.core.listeners;
 
+import java.util.logging.Level;
+
 import javax.annotation.Nonnull;
 
 import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;
@@ -101,19 +103,28 @@ public class SeedListener implements Listener {
     private static final int STORAGE_LOAD_MAX_ATTEMPTS = 100;
 
     /**
-     * Right after a server restart, Slimefun's block-data cache is populated
-     * per-chunk asynchronously - and whether a cache-only lookup like
-     * {@link StorageCacheUtils#getSfItem(Location)} blocks until that
-     * finishes or just returns null depends on Slimefun's own (not
-     * addon-controlled) chunk data load mode, so it cannot be trusted to
-     * tell "not loaded yet" apart from "not one of ours". If a field crop
-     * is broken before its data has actually loaded, Slimefun's own
-     * listener fails to recognize the block and leaves vanilla's default
-     * drops enabled - since the crop block is really just vanilla
-     * wheat/potatoes/carrots/beetroots underneath, that yields vanilla's
-     * own (much worse) drop instead of this addon's crop. Cancel the break
-     * and poll until the cache genuinely has an answer (or a few seconds
-     * pass) before resolving it for real.
+     * Handles the break ourselves, at the earliest possible priority, instead
+     * of relying on {@link AbstractSeed}'s Slimefun-native
+     * {@code BlockBreakHandler}.
+     * <p>
+     * Two distinct problems were observed in the wild, both causing this
+     * addon's crop to silently fail to drop and vanilla's own (much worse)
+     * drop to happen instead:
+     * <ol>
+     * <li>Right after a server restart, Slimefun's block-data cache is
+     * populated per-chunk asynchronously, and a cache-only lookup like
+     * {@link StorageCacheUtils#getSfItem(Location)} can return null even
+     * though the chunk is loaded and this really is one of our crops - the
+     * cache just hasn't caught up yet.</li>
+     * <li>Even once the cache is populated, something else touching the same
+     * {@link BlockBreakEvent} between this listener (LOWEST) and Slimefun's
+     * own native handling (HIGHEST) can turn the block to air before
+     * Slimefun gets a chance to read its {@code Ageable} growth stage -
+     * confirmed by logging: the block was still e.g. WHEAT here, but AIR by
+     * the time Slimefun's handler ran later in the same tick.</li>
+     * </ol>
+     * Capturing the block's state here, at the earliest point any plugin can
+     * react to the break, and doing the harvest ourselves sidesteps both.
      */
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     public void onCropBreakStorageRace(BlockBreakEvent e) {
@@ -126,14 +137,27 @@ public class SeedListener implements Listener {
         }
 
         final Location loc = b.getLocation();
-        if (StorageCacheUtils.getSfItem(loc) != null) {
-            return; // already cached - trust Slimefun's own listener to handle this normally
+        final Player player = e.getPlayer();
+        final ItemStack tool = player.getInventory().getItemInMainHand().clone();
+        final SlimefunItem cached = StorageCacheUtils.getSfItem(loc);
+
+        if (cached != null) {
+            // Found immediately - handle it right now, using the block state
+            // as it is at this earliest priority, before anything else can
+            // touch it.
+            e.setCancelled(true);
+            if (cached instanceof final AbstractSeed seed) {
+                seed.getHarvestDrops(b.getState(), tool, true)
+                    .forEach(drop -> b.getWorld().dropItemNaturally(loc, drop));
+                b.setType(Material.AIR);
+                Slimefun.getDatabaseManager().getBlockDataController().removeBlock(loc);
+            } else {
+                b.breakNaturally(tool);
+            }
+            return;
         }
 
         e.setCancelled(true);
-        final Player player = e.getPlayer();
-        final ItemStack tool = player.getInventory().getItemInMainHand().clone();
-
         final BukkitTask[] task = new BukkitTask[1];
         final int[] attemptsRemaining = { STORAGE_LOAD_MAX_ATTEMPTS };
         task[0] = Gastronomicon.scheduleSyncRepeatingTask(() -> {
@@ -181,14 +205,27 @@ public class SeedListener implements Listener {
     }
 
     private void assignGastroSeed(SlimefunItem item, @Nonnull Location l) {
-        if (item == null)
+        if (item == null) {
             return;
+        }
 
         if (item instanceof DuplicatingSeed || item instanceof VineSeed) {
             NewBlockStorageUtil.createBlock(l, item.getId());
         } else if (item instanceof final FruitingSeed fgs) {
-            NewBlockStorageUtil.createBlock(l, fgs.getFruitingBody().getId());
+            final SlimefunItem fruitingBody = fgs.getFruitingBody();
+            if (fruitingBody == null) {
+                Gastronomicon.log(Level.WARNING,
+                    "assignGastroSeed at " + formatLocation(l) + " -> " + item.getId()
+                        + " has a NULL fruiting body - see the warning logged when this seed was registered."
+                        + " This growth tick will NOT produce a vegetable.");
+                return;
+            }
+            NewBlockStorageUtil.createBlock(l, fruitingBody.getId());
         }
+    }
+
+    private static String formatLocation(@Nonnull Location l) {
+        return l.getWorld().getName() + " " + l.getBlockX() + "," + l.getBlockY() + "," + l.getBlockZ();
     }
 
     private AbstractSeed getGastroSeed(Block cropBlock) {

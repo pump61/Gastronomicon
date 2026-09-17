@@ -1,6 +1,7 @@
 package io.github.schntgaispock.gastronomicon.core;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
@@ -8,6 +9,7 @@ import java.util.List;
 
 import javax.annotation.Nonnull;
 
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import io.github.schntgaispock.gastronomicon.Gastronomicon;
@@ -109,20 +111,63 @@ public class Lang {
         final Gastronomicon plugin = Gastronomicon.getInstance();
         final String path = "lang/" + locale + ".yml";
         final File externalFile = new File(plugin.getDataFolder(), path);
+        final boolean hasBundled = plugin.getResource(path) != null;
 
         // Seed the data folder with a bundled copy (if there is one) the first
         // time this locale is used, so there's something for a translator to
         // find and edit. This is skipped entirely for locales nobody bundled -
         // those are expected to be dropped into the data folder by hand.
-        if (!externalFile.exists() && plugin.getResource(path) != null) {
+        if (!externalFile.exists()) {
+            if (!hasBundled) {
+                return null;
+            }
             plugin.saveResource(path, false);
         }
 
-        if (externalFile.exists()) {
-            return YamlConfiguration.loadConfiguration(externalFile);
+        final YamlConfiguration external = YamlConfiguration.loadConfiguration(externalFile);
+
+        // A translator's copy on disk is meant to be hand-edited, so it's
+        // never overwritten wholesale - but any key that a newer build adds
+        // and the on-disk copy doesn't have yet (translated or not) is merged
+        // in, so new content shows up (falling back to en_US via get()/
+        // getList() until translated) without deleting the file by hand.
+        if (hasBundled) {
+            try (InputStream bundledStream = plugin.getResource(path)) {
+                final YamlConfiguration bundled = YamlConfiguration
+                    .loadConfiguration(new InputStreamReader(bundledStream, StandardCharsets.UTF_8));
+                if (mergeMissingKeys(bundled, external)) {
+                    external.save(externalFile);
+                }
+            } catch (IOException e) {
+                Gastronomicon.warn("Could not update language file " + path + ": " + e.getMessage());
+            }
         }
 
-        final InputStream bundled = plugin.getResource(path);
-        return bundled == null ? null : YamlConfiguration.loadConfiguration(new InputStreamReader(bundled, StandardCharsets.UTF_8));
+        return external;
+    }
+
+    /**
+     * Copies every key present in {@code source} but missing from
+     * {@code target} into {@code target}, recursing into nested sections.
+     * Existing keys in {@code target} - including ones a translator has
+     * edited - are never touched.
+     *
+     * @return whether anything was added
+     */
+    private static boolean mergeMissingKeys(ConfigurationSection source, ConfigurationSection target) {
+        boolean changed = false;
+        for (final String key : source.getKeys(false)) {
+            if (source.isConfigurationSection(key)) {
+                ConfigurationSection targetSection = target.getConfigurationSection(key);
+                if (targetSection == null) {
+                    targetSection = target.createSection(key);
+                }
+                changed |= mergeMissingKeys(source.getConfigurationSection(key), targetSection);
+            } else if (!target.contains(key)) {
+                target.set(key, source.get(key));
+                changed = true;
+            }
+        }
+        return changed;
     }
 }

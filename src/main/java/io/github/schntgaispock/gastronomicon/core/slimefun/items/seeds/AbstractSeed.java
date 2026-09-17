@@ -36,7 +36,7 @@ public abstract class AbstractSeed extends SlimefunItem {
             @Override
             public void onPlayerBreak(BlockBreakEvent e, ItemStack item, List<ItemStack> drops) {
                 if (!dropsOnPlayerBreak()) return;
-                
+
                 drops.clear();
                 drops.addAll(getHarvestDrops(e.getBlock().getState(), item, true));
             }

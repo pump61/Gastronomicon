@@ -13,5 +13,6 @@ public class GastroKeys {
     public static final NamespacedKey COFFEE_MACHINE_WATER = Gastronomicon.key("coffee-machine/water");
     public static final NamespacedKey WATER_SINK_FILLED = Gastronomicon.key("water-sink/filled");
     public static final NamespacedKey GREEN_HOUSE_ENABLED = Gastronomicon.key("green-house/enabled");
+    public static final NamespacedKey GREEN_HOUSE_FERTILIZER_USES = Gastronomicon.key("green-house/fertilizer-uses");
 
 }

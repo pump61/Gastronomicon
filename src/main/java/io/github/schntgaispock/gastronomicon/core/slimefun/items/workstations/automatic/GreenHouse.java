@@ -1,5 +1,7 @@
 package io.github.schntgaispock.gastronomicon.core.slimefun.items.workstations.automatic;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Consumer;
 
 import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;
@@ -10,12 +12,15 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataType;
 
 import io.github.schntgaispock.gastronomicon.Gastronomicon;
 import io.github.schntgaispock.gastronomicon.core.Lang;
 import io.github.schntgaispock.gastronomicon.core.slimefun.GastroGroups;
 import io.github.schntgaispock.gastronomicon.core.slimefun.GastroStacks;
 import io.github.schntgaispock.gastronomicon.util.ChunkPDC;
+import io.github.schntgaispock.gastronomicon.util.StringUtil;
 import io.github.schntgaispock.gastronomicon.util.item.GastroKeys;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
@@ -63,6 +68,7 @@ public class GreenHouse extends AContainer {
     public static final int[] OUTPUT_SLOTS = { 12, 13, 14, 21, 22, 23, 30, 31, 32 };
     public static final int START_SLOT = 52;
     public static final int STOP_SLOT = 53;
+    public static final int GREEN_HOUSE_FERTILIZER_USES = 8;
     public static final int[] BACKGROUND_SLOTS = { 0, 1, 2, 3, 4, 5, 6, 7, 8,
         11, 15, 16, 17,
         24, 25, 26,
@@ -235,9 +241,14 @@ public class GreenHouse extends AContainer {
         }
 
         final ItemStack fertilizer = menu.getItemInSlot(FERTILIZER_SLOT);
+        if (fertilizer == null) {
+            return null;
+        }
+
         final SlimefunItem infernalBonemeal = SlimefunItem.getById(SlimefunItems.INFERNAL_BONEMEAL.getItemId());
-        final boolean isInfernal = fertilizer != null && infernalBonemeal != null && infernalBonemeal.isItem(fertilizer);
-        if (fertilizer == null || (fertilizer.getType() != Material.BONE_MEAL && !isInfernal)) {
+        final boolean isInfernal = infernalBonemeal != null && infernalBonemeal.isItem(fertilizer);
+
+        if (fertilizer.getType() != Material.BONE_MEAL && !isInfernal && !isSlimefunFertilizer(fertilizer)) {
             return null;
         }
 
@@ -305,13 +316,98 @@ public class GreenHouse extends AContainer {
             final MachineRecipe next = findNextRecipe(inv);
 
             if (next != null) {
-                inv.consumeItem(FERTILIZER_SLOT);
+                consumeFertilizer(inv);
 
                 currentOperation = new CraftingOperation(next);
                 getMachineProcessor().startOperation(b, currentOperation);
                 getMachineProcessor().updateProgressBar(inv, STATUS_SLOT, currentOperation);
             }
         }
+    }
+
+    // Regular/Infernal Bonemeal are consumed whole every cycle, like before.
+    // A Slimefun Fertilizer is far more potent - it's only consumed once its
+    // uses (tracked on the ItemStack itself) run out, lasting several cycles.
+    private void consumeFertilizer(BlockMenu menu) {
+        final ItemStack fertilizer = menu.getItemInSlot(FERTILIZER_SLOT);
+        if (fertilizer == null) {
+            return;
+        }
+
+        if (!isSlimefunFertilizer(fertilizer)) {
+            menu.consumeItem(FERTILIZER_SLOT);
+            return;
+        }
+
+        final int usesLeft = getFertilizerUses(fertilizer) - 1;
+        if (usesLeft > 0) {
+            final ItemStack updated = fertilizer.clone();
+            setFertilizerUses(updated, usesLeft);
+            menu.replaceExistingItem(FERTILIZER_SLOT, updated);
+            return;
+        }
+
+        menu.consumeItem(FERTILIZER_SLOT);
+
+        // If there's another one behind it in the same stack, it's a fresh
+        // unit - reset its displayed uses back to full.
+        final ItemStack remaining = menu.getItemInSlot(FERTILIZER_SLOT);
+        if (remaining != null && isSlimefunFertilizer(remaining)) {
+            final ItemStack refreshed = remaining.clone();
+            setFertilizerUses(refreshed, GREEN_HOUSE_FERTILIZER_USES);
+            menu.replaceExistingItem(FERTILIZER_SLOT, refreshed);
+        }
+    }
+
+    // Every "can of fertilizer" Slimefun offers - the generic one plus every
+    // crop-specific variant - all work the same way in the Green House.
+    private static final SlimefunItemStack[] SLIMEFUN_FERTILIZERS = {
+        SlimefunItems.FERTILIZER,
+        SlimefunItems.WHEAT_FERTILIZER,
+        SlimefunItems.CARROT_FERTILIZER,
+        SlimefunItems.POTATO_FERTILIZER,
+        SlimefunItems.SEEDS_FERTILIZER,
+        SlimefunItems.BEETROOT_FERTILIZER,
+        SlimefunItems.MELON_FERTILIZER,
+        SlimefunItems.APPLE_FERTILIZER,
+        SlimefunItems.SWEET_BERRIES_FERTILIZER,
+        SlimefunItems.KELP_FERTILIZER,
+        SlimefunItems.COCOA_FERTILIZER,
+        SlimefunItems.SEAGRASS_FERTILIZER,
+    };
+
+    private static boolean isSlimefunFertilizer(ItemStack item) {
+        for (final SlimefunItemStack stack : SLIMEFUN_FERTILIZERS) {
+            final SlimefunItem sfItem = SlimefunItem.getById(stack.getItemId());
+            if (sfItem != null && sfItem.isItem(item)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static int getFertilizerUses(ItemStack item) {
+        final Integer uses = item.getItemMeta().getPersistentDataContainer()
+            .get(GastroKeys.GREEN_HOUSE_FERTILIZER_USES, PersistentDataType.INTEGER);
+        return uses == null ? GREEN_HOUSE_FERTILIZER_USES : uses;
+    }
+
+    private static void setFertilizerUses(ItemStack item, int uses) {
+        final ItemMeta meta = item.getItemMeta();
+        final boolean hadUsesTag = meta.getPersistentDataContainer()
+            .has(GastroKeys.GREEN_HOUSE_FERTILIZER_USES, PersistentDataType.INTEGER);
+        meta.getPersistentDataContainer().set(GastroKeys.GREEN_HOUSE_FERTILIZER_USES, PersistentDataType.INTEGER,
+            uses);
+
+        final List<String> lore = meta.hasLore() ? new ArrayList<>(meta.getLore()) : new ArrayList<>();
+        if (hadUsesTag && !lore.isEmpty()) {
+            lore.remove(lore.size() - 1);
+        }
+        lore.add(StringUtil.formatColors(Lang.get("menu.green_house_fertilizer_uses")
+            .replace("{uses}", String.valueOf(uses))
+            .replace("{max}", String.valueOf(GREEN_HOUSE_FERTILIZER_USES))));
+        meta.setLore(lore);
+        item.setItemMeta(meta);
     }
 
 }

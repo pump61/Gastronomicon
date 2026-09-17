@@ -49,7 +49,7 @@ public class ShapelessGastroRecipe extends GastroRecipe {
             return RecipeMatchResult.NO_MATCH;
         }
 
-        if (!givenTools.containsAll(getTools()))
+        if (!toolsMatch(givenTools, getTools()))
             return RecipeMatchResult.NO_MATCH;
 
         Arrays.sort(givenIngredients, RecipeUtil::compareItemStacks);

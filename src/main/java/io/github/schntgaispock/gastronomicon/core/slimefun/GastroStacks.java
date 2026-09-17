@@ -29,6 +29,8 @@ import io.github.thebusybiscuit.slimefun4.core.attributes.MachineTier;
 import io.github.thebusybiscuit.slimefun4.core.attributes.MachineType;
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
+import io.github.thebusybiscuit.slimefun4.libraries.dough.skins.PlayerHead;
+import io.github.thebusybiscuit.slimefun4.libraries.dough.skins.PlayerSkin;
 import io.github.thebusybiscuit.slimefun4.utils.HeadTexture;
 import io.github.thebusybiscuit.slimefun4.utils.LoreBuilder;
 import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
@@ -147,7 +149,7 @@ public class GastroStacks {
         lore(Lang.getList("guide.how_to_craft.toaster.lore")));
 
     public static final ItemStack GUIDE_RECIPE_COFFEE_MACHINE = new CustomItemStack(
-        Material.BREWING_STAND,
+        PlayerHead.getItemStack(PlayerSkin.fromBase64(HeadTextures.COFFEE_MACHINE)),
         "&b" + Lang.get("guide.how_to_craft.coffee_machine.name"),
         lore(Lang.getList("guide.how_to_craft.coffee_machine.lore")));
 
@@ -234,7 +236,13 @@ public class GastroStacks {
     public static final ItemStack MENU_SOIL_INPUT = new CustomItemStack(Material.BLUE_STAINED_GLASS_PANE,
         "&9" + Lang.get("menu.soil_input"));
     public static final ItemStack MENU_FERTILIZER_INPUT = new CustomItemStack(Material.BLUE_STAINED_GLASS_PANE,
-        "&9" + Lang.get("menu.fertilizer_input"));
+        "&9" + Lang.get("menu.fertilizer_input"), lore(Lang.getList("menu.fertilizer_input_lore")));
+    public static final ItemStack MENU_DIRT_INPUT = new CustomItemStack(Material.BLUE_STAINED_GLASS_PANE,
+        "&9" + Lang.get("menu.dirt_input"));
+    public static final ItemStack MENU_BONEMEAL_INPUT = new CustomItemStack(Material.BLUE_STAINED_GLASS_PANE,
+        "&9" + Lang.get("menu.bonemeal_input"));
+    public static final ItemStack MENU_HOE_INPUT = new CustomItemStack(Material.BLACK_STAINED_GLASS_PANE,
+        ChatColor.of("#999999") + Lang.get("menu.hoe_input"), lore(Lang.getList("menu.hoe_input_lore")));
 
     // ---- Dummy ----
 
@@ -415,14 +423,21 @@ public class GastroStacks {
         Material.GRINDSTONE,
         Lang.get("items.GN_MILL.name"));
 
+    public static final SlimefunItemStack SOIL_FABRICATOR = ThemedItemStack.of(
+        GastroTheme.MECHANICAL,
+        "GN_SOIL_FABRICATOR",
+        Material.COMPOSTER,
+        Lang.get("items.GN_SOIL_FABRICATOR.name"),
+        lore(Lang.getList("items.GN_SOIL_FABRICATOR.lore")));
+
     public static final SlimefunItemStack FERMENTER = ThemedItemStack.of(
         GastroTheme.MECHANICAL,
         "GN_FERMENTER",
         Material.BARREL,
         Lang.get("items.GN_FERMENTER.name"),
         lore(Lang.getList("items.GN_FERMENTER.lore"),
-        StringUtil.waterUsed(2000, " storage capacity"),
-        StringUtil.waterUsed(125, " per craft")));
+        StringUtil.waterUsed(2000, Lang.get("generated.water_storage_capacity_suffix")),
+        StringUtil.waterUsed(125, Lang.get("generated.water_per_craft_suffix"))));
 
     public static final SlimefunItemStack LARGE_FERMENTER = ThemedItemStack.of(
         GastroTheme.MECHANICAL,
@@ -430,8 +445,8 @@ public class GastroStacks {
         Material.BARREL,
         Lang.get("items.GN_LARGE_FERMENTER.name"),
         lore(Lang.getList("items.GN_LARGE_FERMENTER.lore"),
-        StringUtil.waterUsed(16000, " storage capacity"),
-        StringUtil.waterUsed(125, " per craft")));
+        StringUtil.waterUsed(16000, Lang.get("generated.water_storage_capacity_suffix")),
+        StringUtil.waterUsed(125, Lang.get("generated.water_per_craft_suffix"))));
 
     public static final SlimefunItemStack WATER_SINK = ThemedItemStack.of(
         GastroTheme.MECHANICAL,
@@ -491,6 +506,13 @@ public class GastroStacks {
         Material.POLISHED_ANDESITE,
         Lang.get("items.GN_CABINET.name"),
         lore(Lang.getList("items.GN_CABINET.lore")));
+
+    public static final SlimefunItemStack ARTIFICIAL_BEEHIVE = ThemedItemStack.of(
+        GastroTheme.MECHANICAL,
+        "GN_ARTIFICIAL_BEEHIVE",
+        Material.HONEYCOMB_BLOCK,
+        Lang.get("items.GN_ARTIFICIAL_BEEHIVE.name"),
+        lore(Lang.getList("items.GN_ARTIFICIAL_BEEHIVE.lore")));
 
     public static final SlimefunItemStack FRIDGE_MODULE = ThemedItemStack.of(
         GastroTheme.MECHANICAL,
@@ -836,10 +858,10 @@ public class GastroStacks {
         HeadTextures.VANILLA,
         Lang.get("items.GN_VANILLA_BEANS.name"));
 
-    public static final SlimefunItemStack VANILLA_PLANT = ThemedItemStack.ingredient(
-        "GN_VANILLA_PLANT",
-        Material.VINE,
-        Lang.get("items.GN_VANILLA_PLANT.name"));
+    public static final SlimefunItemStack CINNAMON = ThemedItemStack.ingredient(
+        "GN_CINNAMON",
+        Material.DEAD_BUSH,
+        Lang.get("items.GN_CINNAMON.name"));
 
     // -- Grown from trees --
 
@@ -1348,6 +1370,41 @@ public class GastroStacks {
         .effects(FoodEffect.positivePotionEffect(PotionEffectType.SPEED, 60))
         .build();
 
+    public static final FoodItemStack CAPPUCCINO = new FoodItemStackBuilder()
+        .id("GN_CAPPUCCINO")
+        .texture(HeadTextures.CAPPUCCINO)
+        .name(Lang.get("items.GN_CAPPUCCINO.name"))
+        .effects(FoodEffect.positivePotionEffect(PotionEffectType.SPEED, 60))
+        .build();
+
+    public static final FoodItemStack CAFE_LATTE = new FoodItemStackBuilder()
+        .id("GN_CAFE_LATTE")
+        .texture(HeadTextures.CAFE_LATTE)
+        .name(Lang.get("items.GN_CAFE_LATTE.name"))
+        .effects(FoodEffect.positivePotionEffect(PotionEffectType.SPEED, 60))
+        .build();
+
+    public static final FoodItemStack HOT_CHOCOLATE = new FoodItemStackBuilder()
+        .id("GN_HOT_CHOCOLATE")
+        .texture(HeadTextures.HOT_CHOCOLATE)
+        .name(Lang.get("items.GN_HOT_CHOCOLATE.name"))
+        .effects(FoodEffect.positivePotionEffect(PotionEffectType.SPEED, 60))
+        .build();
+
+    public static final FoodItemStack CARAMEL_CHOCOLATE_FRAPPE = new FoodItemStackBuilder()
+        .id("GN_CARAMEL_CHOCOLATE_FRAPPE")
+        .texture(HeadTextures.CARAMEL_CHOCOLATE_FRAPPE)
+        .name(Lang.get("items.GN_CARAMEL_CHOCOLATE_FRAPPE.name"))
+        .effects(FoodEffect.positivePotionEffect(PotionEffectType.SPEED, 60))
+        .build();
+
+    public static final FoodItemStack ICED_COFFEE = new FoodItemStackBuilder()
+        .id("GN_ICED_COFFEE")
+        .texture(HeadTextures.ICED_COFFEE)
+        .name(Lang.get("items.GN_ICED_COFFEE.name"))
+        .effects(FoodEffect.positivePotionEffect(PotionEffectType.SPEED, 60))
+        .build();
+
     public static final SlimefunItemStack TOFU = ThemedItemStack.ingredient(
         "GN_TOFU",
         HeadTextures.TOFU,
@@ -1369,6 +1426,19 @@ public class GastroStacks {
         "GN_TURMERIC_POWDER",
         Material.GLOWSTONE_DUST,
         Lang.get("items.GN_TURMERIC_POWDER.name"));
+
+    public static final SlimefunItemStack COCOA_POWDER = ThemedItemStack.ingredient(
+        "GN_COCOA_POWDER",
+        Material.BROWN_DYE,
+        Lang.get("items.GN_COCOA_POWDER.name"));
+
+    public static final FoodItemStack CHOCOLATE = new FoodItemStackBuilder()
+        .id("GN_CHOCOLATE")
+        .texture(HeadTextures.CHOCOLATE)
+        .name(Lang.get("items.GN_CHOCOLATE.name"))
+        .hunger(1)
+        .effects(FoodEffect.positivePotionEffect(PotionEffectType.SPEED, 30))
+        .build();
 
     public static final SlimefunItemStack RED_BEAN_PASTE = ThemedItemStack.ingredient(
         "GN_RED_BEAN_PASTE",
@@ -1489,6 +1559,15 @@ public class GastroStacks {
         .name(Lang.get("items.GN_ROAST_BEEF_SANDWICH.name"))
         .hunger(8)
         .effects(FoodEffect.chanceOf(FoodEffect.positivePotionEffect(PotionEffectType.SPEED, 90), 0.5))
+        .build();
+
+    public static final FoodItemStack PUFFERFISH_SANDWICH = new FoodItemStackBuilder()
+        .id("GN_PUFFERFISH_SANDWICH")
+        .texture(HeadTextures.PUFFERFISH_SANDWICH)
+        .name(Lang.get("items.GN_PUFFERFISH_SANDWICH.name"))
+        .hunger(8)
+        .effects(FoodEffect.negativePotionEffect(PotionEffectType.NAUSEA, 5))
+        .lore(Lang.get("items.GN_PUFFERFISH_SANDWICH.lore"))
         .build();
 
     // Salads
@@ -2150,6 +2229,11 @@ public class GastroStacks {
         .build();
 
     // Cold desserts
+
+    public static final SlimefunItemStack ICE_ROCKS = ThemedItemStack.ingredient(
+        "GN_ICE_ROCKS",
+        HeadTextures.ICE_ROCKS,
+        Lang.get("items.GN_ICE_ROCKS.name"));
 
     public static final FoodItemStack VANILLA_ICE_CREAM = new FoodItemStackBuilder()
         .id("GN_VANILLA_ICE_CREAM")

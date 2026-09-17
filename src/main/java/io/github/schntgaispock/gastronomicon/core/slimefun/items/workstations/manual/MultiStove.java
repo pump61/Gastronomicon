@@ -33,13 +33,15 @@ public class MultiStove extends GastroWorkstation implements EnergyNetComponent 
 
     @RequiredArgsConstructor
     public enum Temperature {
-        LOW(TEMPERATURE_BUTTON_LOW, "Low"),
-        MEDIUM(TEMPERATURE_BUTTON_MEDIUM, "Medium"),
-        HIGH(TEMPERATURE_BUTTON_HIGH, "High");
+        LOW(TEMPERATURE_BUTTON_LOW),
+        MEDIUM(TEMPERATURE_BUTTON_MEDIUM),
+        HIGH(TEMPERATURE_BUTTON_HIGH);
 
         private final @Getter ItemStack item;
 
-        private final @Getter String text;
+        public String getText() {
+            return Lang.get("menu.temperature." + name().toLowerCase());
+        }
 
         public static @Nonnull Temperature fromText(String text) {
             for (Temperature temp : values()) {
@@ -47,7 +49,7 @@ public class MultiStove extends GastroWorkstation implements EnergyNetComponent 
                     return temp;
                 }
             }
-            throw new IllegalArgumentException(text + " is now a valid value");
+            throw new IllegalArgumentException(text + " is not a valid value");
         }
 
         public @Nullable Temperature next() {

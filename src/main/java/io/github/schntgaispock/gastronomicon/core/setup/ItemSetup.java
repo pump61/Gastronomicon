@@ -23,6 +23,7 @@ import io.github.schntgaispock.gastronomicon.api.recipes.RecipeRegistry;
 import io.github.schntgaispock.gastronomicon.api.recipes.ShapedGastroRecipe;
 import io.github.schntgaispock.gastronomicon.api.recipes.ShapelessGastroRecipe;
 import io.github.schntgaispock.gastronomicon.api.recipes.GastroRecipe.RecipeShape;
+import io.github.schntgaispock.gastronomicon.core.Lang;
 import io.github.schntgaispock.gastronomicon.core.slimefun.GastroGroups;
 import io.github.schntgaispock.gastronomicon.core.slimefun.GastroStacks;
 import io.github.schntgaispock.gastronomicon.core.slimefun.items.UnplaceableItem;
@@ -32,12 +33,12 @@ import io.github.schntgaispock.gastronomicon.core.slimefun.items.seeds.CropSeed;
 import io.github.schntgaispock.gastronomicon.core.slimefun.items.seeds.DuplicatingSeed;
 import io.github.schntgaispock.gastronomicon.core.slimefun.items.seeds.FruitingSeed;
 import io.github.schntgaispock.gastronomicon.core.slimefun.items.seeds.SimpleSeed;
-import io.github.schntgaispock.gastronomicon.core.slimefun.items.seeds.VineSeed;
 import io.github.schntgaispock.gastronomicon.core.slimefun.items.workstations.automatic.CoffeeMachine;
 import io.github.schntgaispock.gastronomicon.core.slimefun.items.workstations.automatic.ElectricKitchen;
 import io.github.schntgaispock.gastronomicon.core.slimefun.items.workstations.automatic.FishingNet;
 import io.github.schntgaispock.gastronomicon.core.slimefun.items.workstations.automatic.GreenHouse;
 import io.github.schntgaispock.gastronomicon.core.slimefun.items.workstations.automatic.GreenHouseCrops;
+import io.github.schntgaispock.gastronomicon.core.slimefun.items.workstations.automatic.SoilFabricator;
 import io.github.schntgaispock.gastronomicon.core.slimefun.items.workstations.automatic.Toaster;
 import io.github.schntgaispock.gastronomicon.core.slimefun.items.workstations.manual.ChefAndroidTrainer;
 import io.github.schntgaispock.gastronomicon.core.slimefun.items.workstations.manual.CowInAJar;
@@ -65,12 +66,9 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class ItemSetup {
 
-    // Biome stopped being a plain enum (it's now a registry-backed OldEnum), so it can
-    // no longer be used as a switch selector with unqualified case labels.
-    private static final Set<Biome> CRAB_TRAP_BIOMES = Set.of(
-        Biome.RIVER, Biome.BEACH, Biome.OCEAN, Biome.COLD_OCEAN, Biome.DEEP_OCEAN,
-        Biome.WARM_OCEAN, Biome.FROZEN_OCEAN, Biome.LUKEWARM_OCEAN, Biome.DEEP_COLD_OCEAN,
-        Biome.DEEP_FROZEN_OCEAN, Biome.DEEP_LUKEWARM_OCEAN);
+    // Every biome the server knows about, including the Nether/End ones -
+    // the Crab Trap works anywhere now, not just ocean/river/beach biomes.
+    private static final Set<Biome> CRAB_TRAP_BIOMES = Set.of(Biome.values());
 
     // Polished Andesite already exists as GastroStacks.COUNTER, and Petrified Oak
     // Slab isn't obtainable in survival, so both are skipped when generating the
@@ -100,13 +98,29 @@ public class ItemSetup {
         return slab;
     }
 
-    private static String prettifySlabName(Material slab, String suffix) {
+    // Falls back to deriving a readable (English-only) name from the enum
+    // constant itself if a slab is missing from materials.slab.* - so a new
+    // slab added by a future game version still gets a sane name instead of
+    // showing the raw, untranslated Lang key.
+    private static String prettifySlabMaterialName(Material slab) {
+        final String key = "materials.slab." + slab.name();
+        final String translated = Lang.get(key);
+        if (!translated.equals(key)) {
+            return translated;
+        }
+
         final String[] words = slab.name().replace("_SLAB", "").split("_");
         final StringBuilder name = new StringBuilder();
         for (final String word : words) {
             name.append(word.charAt(0)).append(word.substring(1).toLowerCase()).append(' ');
         }
-        return name.append(suffix).toString();
+        return name.toString().trim();
+    }
+
+    private static String prettifySlabName(Material slab, String typeName) {
+        return Lang.get("generated.storage_variant_name_format")
+            .replace("{material}", prettifySlabMaterialName(slab))
+            .replace("{type}", typeName);
     }
 
     // Every Counter is crafted from a matching pair of slabs and a Chest or
@@ -138,21 +152,23 @@ public class ItemSetup {
         }
     }
 
-    // Every Cabinet uses two of the matching Counter as its top/bottom middle
-    // ingredients, the same shape the original Polished Andesite Cabinet used.
-    private static void registerCabinet(Gastronomicon gn, SlimefunItemStack item, SlimefunItemStack counter, ItemStack oakPlanks, ItemStack ironNugget) {
+    // Every Cabinet is a Chest surrounded by the matching full block (e.g. a
+    // Prismarine Cabinet is a Chest ringed by Prismarine blocks).
+    private static void registerCabinet(Gastronomicon gn, SlimefunItemStack item, Material blockMaterial) {
+        final ItemStack block = new ItemStack(blockMaterial);
+
         new StorageBlock(
             GastroGroups.STORAGE_DECO,
             item,
             new ItemStack[] {
-                oakPlanks, counter, oakPlanks,
-                oakPlanks, ironNugget, oakPlanks,
-                oakPlanks, counter, oakPlanks
+                block, block, block,
+                block, new ItemStack(Material.CHEST), block,
+                block, block, block
             },
             6).register(gn);
     }
 
-    private static void registerStorageDecoVariants(Gastronomicon gn, ItemStack oakPlanks, ItemStack ironNugget) {
+    private static void registerStorageDecoVariants(Gastronomicon gn) {
         for (final Material slab : Tag.SLABS.getValues()) {
             if (COUNTER_VARIANT_EXCLUDED_SLABS.contains(slab)) {
                 continue;
@@ -164,17 +180,18 @@ public class ItemSetup {
                 GastroTheme.MECHANICAL,
                 "GN_COUNTER_" + idSuffix,
                 slab,
-                prettifySlabName(slab, "Counter"),
-                "&7A small storage unit");
+                prettifySlabName(slab, Lang.get("items.GN_COUNTER.name")),
+                Lang.getList("items.GN_COUNTER.lore").toArray(new String[0]));
             registerCounter(gn, counter, slab);
 
+            final Material cabinetMaterial = resolveFullBlockMaterial(slab);
             final SlimefunItemStack cabinet = ThemedItemStack.of(
                 GastroTheme.MECHANICAL,
                 "GN_CABINET_" + idSuffix,
-                resolveFullBlockMaterial(slab),
-                prettifySlabName(slab, "Cabinet"),
-                "&7A large storage unit");
-            registerCabinet(gn, cabinet, counter, oakPlanks, ironNugget);
+                cabinetMaterial,
+                prettifySlabName(slab, Lang.get("items.GN_CABINET.name")),
+                Lang.getList("items.GN_CABINET.lore").toArray(new String[0]));
+            registerCabinet(gn, cabinet, cabinetMaterial);
         }
     }
 
@@ -242,6 +259,7 @@ public class ItemSetup {
         final ItemStack MUTTON = new ItemStack(Material.MUTTON);
         final ItemStack APPLE = new ItemStack(Material.APPLE);
         final ItemStack SALMON = new ItemStack(Material.SALMON);
+        final ItemStack PUFFERFISH = new ItemStack(Material.PUFFERFISH);
         final ItemStack INK_SAC = new ItemStack(Material.INK_SAC);
         final ItemStack GLOW_INK_SAC = new ItemStack(Material.GLOW_INK_SAC);
         final ItemStack CARROT = new ItemStack(Material.CARROT);
@@ -532,6 +550,14 @@ public class ItemSetup {
                 null, ANDESITE_SLAB, null
             }).register(gn);
 
+        new SoilFabricator(
+            GastroStacks.SOIL_FABRICATOR,
+            new ItemStack[] {
+                null, new ItemStack(Material.IRON_HOE), null,
+                new ItemStack(Material.DIRT), new ItemStack(Material.COMPOSTER), new ItemStack(Material.DIRT),
+                null, new ItemStack(Material.BONE_MEAL), null
+            }).register(gn);
+
         new Fermenter(
             GastroStacks.FERMENTER,
             new ItemStack[] {
@@ -569,8 +595,9 @@ public class ItemSetup {
             }).register(gn);
 
         registerCounter(gn, GastroStacks.COUNTER, Material.POLISHED_ANDESITE_SLAB);
-        registerCabinet(gn, GastroStacks.CABINET, GastroStacks.COUNTER, OAK_PLANKS, IRON_NUGGET);
-        registerStorageDecoVariants(gn, OAK_PLANKS, IRON_NUGGET);
+        registerCabinet(gn, GastroStacks.CABINET, Material.POLISHED_ANDESITE);
+        registerCabinet(gn, GastroStacks.ARTIFICIAL_BEEHIVE, Material.HONEYCOMB_BLOCK);
+        registerStorageDecoVariants(gn);
 
         // Fridge Module: place one with an Iron Block above it and an Iron Door
         // on any side to assemble a Fridge (see FridgeStructureListener).
@@ -1025,18 +1052,12 @@ public class ItemSetup {
             RecipeUtil.singleCenter(Material.SHORT_GRASS))
                 .register(gn);
 
-        new UnplaceableSolid(
-            GastroGroups.RAW_INGREDIENTS,
-            GastroStacks.VANILLA_BEANS,
-            GastroRecipeType.BREAK,
-            RecipeUtil.singleCenter(GastroStacks.VANILLA_PLANT))
-                .register(gn);
-
-        new VineSeed(
-            GastroStacks.VANILLA_PLANT,
-            RecipeUtil.singleCenter(Material.SHORT_GRASS),
-            GastroStacks.VANILLA_BEANS)
-                .register(gn);
+        new SimpleGastroFoodBuilder()
+            .type(GastroRecipeType.MULTI_STOVE)
+            .item(GastroStacks.VANILLA_BEANS)
+            .ingredients(new ItemStack(Material.SPORE_BLOSSOM))
+            .temperature(Temperature.LOW)
+            .register(gn);
 
         // -- Native replacements for ExoticGarden crops --
 
@@ -1157,6 +1178,13 @@ public class ItemSetup {
             GastroStacks.FIDDLEHEADS,
             GastroRecipeType.BREAK,
             RecipeUtil.singleCenter(Material.FERN))
+                .register(gn);
+
+        new UnplaceableSolid(
+            GastroGroups.RAW_INGREDIENTS,
+            GastroStacks.CINNAMON,
+            GastroRecipeType.BREAK,
+            RecipeUtil.singleCenter(Material.SHORT_GRASS))
                 .register(gn);
 
         new UnplaceableSolid(
@@ -1404,6 +1432,20 @@ public class ItemSetup {
             .ingredients(GastroStacks.RYE)
             .register(gn);
 
+        new SimpleGastroFoodBuilder()
+            .item(GastroStacks.COCOA_POWDER)
+            .type(GastroRecipeType.MILL)
+            .ingredients(COCOA_BEANS)
+            .tools(GastroStacks.MORTAR_AND_PESTLE)
+            .register(gn);
+
+        new SimpleGastroFoodBuilder()
+            .type(GastroRecipeType.MULTI_STOVE)
+            .item(GastroStacks.CHOCOLATE)
+            .ingredients(GastroStacks.COCOA_POWDER, SUGAR)
+            .temperature(Temperature.LOW)
+            .register(gn);
+
         // Alternate Mill recipe for Slimefun's Salt, using the same
         // ingredients as its Ore Washer recipe
         RecipeRegistry.registerRecipe(new ShapelessGastroRecipe(
@@ -1574,6 +1616,42 @@ public class ItemSetup {
             .ingredients(GastroStacks.COFFEE_BEANS, SUGAR)
             .register(gn);
 
+        new GastroFoodBuilder()
+            .type(GastroRecipeType.COFFEE_MACHINE)
+            .item(GastroStacks.CAPPUCCINO)
+            .container(GLASS_BOTTLE)
+            .ingredients(GastroStacks.COFFEE_BEANS, SlimefunItems.HEAVY_CREAM, GastroStacks.CINNAMON)
+            .register(gn);
+
+        new GastroFoodBuilder()
+            .type(GastroRecipeType.COFFEE_MACHINE)
+            .item(GastroStacks.CAFE_LATTE)
+            .container(GLASS_BOTTLE)
+            .ingredients(GastroStacks.COFFEE_BEANS, SlimefunItems.HEAVY_CREAM, SlimefunItems.HEAVY_CREAM)
+            .register(gn);
+
+        new GastroFoodBuilder()
+            .type(GastroRecipeType.COFFEE_MACHINE)
+            .item(GastroStacks.HOT_CHOCOLATE)
+            .container(GLASS_BOTTLE)
+            .ingredients(GastroStacks.COFFEE_BEANS, GastroStacks.CHOCOLATE, SUGAR)
+            .register(gn);
+
+        new GastroFoodBuilder()
+            .type(GastroRecipeType.COFFEE_MACHINE)
+            .item(GastroStacks.CARAMEL_CHOCOLATE_FRAPPE)
+            .container(GLASS_BOTTLE)
+            .ingredients(GastroStacks.COFFEE_BEANS, GastroStacks.CARAMEL, GastroStacks.CHOCOLATE,
+                SlimefunItems.HEAVY_CREAM)
+            .register(gn);
+
+        new GastroFoodBuilder()
+            .type(GastroRecipeType.COFFEE_MACHINE)
+            .item(GastroStacks.ICED_COFFEE)
+            .container(GLASS_BOTTLE)
+            .ingredients(GastroStacks.COFFEE_BEANS, SUGAR, GastroStacks.ICE_ROCKS)
+            .register(gn);
+
         new SimpleGastroFoodBuilder()
             .type(GastroRecipeType.MULTI_STOVE)
             .item(GastroStacks.TOFU)
@@ -1710,6 +1788,16 @@ public class ItemSetup {
 
             new GastroFoodBuilder()
                 .type(GastroRecipeType.CULINARY_WORKBENCH)
+                .item(GastroStacks.PUFFERFISH_SANDWICH)
+                .shape(RecipeShape.SHAPED)
+                .ingredients(
+                    null, GastroStacks.TOAST, null,
+                    MAYO, PUFFERFISH, GastroStacks.KETCHUP,
+                    null, GastroStacks.TOAST, null)
+                .register(gn);
+
+            new GastroFoodBuilder()
+                .type(GastroRecipeType.CULINARY_WORKBENCH)
                 .item(GastroStacks.GREEK_SALAD)
                 .shape(RecipeShape.SHAPELESS)
                 .ingredients(TOMATO, GastroStacks.CUCUMBER, ONION, SlimefunItems.CHEESE)
@@ -1760,6 +1848,13 @@ public class ItemSetup {
             .type(GastroRecipeType.MULTI_STOVE)
             .item(GastroStacks.TEMPURA_BROCCOLI)
             .ingredients(GastroStacks.BROCCOLI, BREAD)
+            .tools(GastroStacks.FRYING_PAN)
+            .register(gn);
+
+        new GastroFoodBuilder()
+            .type(GastroRecipeType.MULTI_STOVE)
+            .item(GastroStacks.FRIED_CALAMARI)
+            .ingredients(GastroStacks.RAW_SQUID, BREAD)
             .tools(GastroStacks.FRYING_PAN)
             .register(gn);
 
@@ -2398,6 +2493,13 @@ public class ItemSetup {
                 .tools(GastroStacks.BAKING_TRAY, GastroStacks.WHISK)
                 .amount(3)
                 .register(gn);
+
+        new SimpleGastroFoodBuilder()
+            .type(GastroRecipeType.FREEZER)
+            .item(GastroStacks.ICE_ROCKS)
+            .amount(8)
+            .ingredients(WATER_BUCKET)
+            .register(gn);
 
         new GastroFoodBuilder()
             .type(GastroRecipeType.FREEZER)

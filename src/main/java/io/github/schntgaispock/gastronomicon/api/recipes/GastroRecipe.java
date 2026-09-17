@@ -15,6 +15,8 @@ import io.github.schntgaispock.gastronomicon.api.recipes.components.RecipeInput;
 import io.github.schntgaispock.gastronomicon.api.recipes.components.SingleRecipeComponent;
 import io.github.schntgaispock.gastronomicon.core.Lang;
 import io.github.schntgaispock.gastronomicon.core.slimefun.recipes.GastroRecipeType;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -185,6 +187,36 @@ public abstract class GastroRecipe {
     @ParametersAreNullableByDefault
     public static boolean componentMatches(RecipeComponent<?> component, ItemStack item) {
         return component == null ? item == null || item.getType() == Material.AIR : component.matches(item);
+    }
+
+    /**
+     * Checks that every required tool has a matching item among the given
+     * tools. Matches Slimefun items by their ID (like {@link
+     * SingleRecipeComponent#matches}) rather than raw {@link ItemStack}
+     * equality, so a tool still matches after its name/lore changes (e.g. a
+     * translation update) even though items already crafted before that
+     * change still have the old text baked into their meta.
+     */
+    protected static boolean toolsMatch(List<ItemStack> givenTools, Set<ItemStack> requiredTools) {
+        for (final ItemStack required : requiredTools) {
+            final boolean found = givenTools.stream().anyMatch(given -> toolMatches(required, given));
+            if (!found) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @ParametersAreNullableByDefault
+    private static boolean toolMatches(ItemStack required, ItemStack given) {
+        if (given == null) {
+            return false;
+        } else if (required instanceof final SlimefunItemStack sfStack) {
+            final SlimefunItem sfItem = SlimefunItem.getById(sfStack.getItemId());
+            return sfItem != null && sfItem.isItem(given);
+        } else {
+            return given.isSimilar(required);
+        }
     }
 
 }

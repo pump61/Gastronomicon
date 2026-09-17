@@ -21,7 +21,7 @@ items:
   GN_TOASTER:
     name: "Toaster"
     lore:
-      - "&7Right-click it while holding Sliced Bread"
+      - "&eRight-click&7 it while holding Sliced Bread"
       - "&7to feed it - after 5 seconds it"
       - "&7toasts into a Toasted Bread"
   GN_TOASTED_BREAD:
@@ -94,6 +94,16 @@ items:
     name: "Freezer"
   GN_MILL:
     name: "Mill"
+  GN_SOIL_FABRICATOR:
+    name: "Soil Fabricator"
+    lore:
+      - "&7Insert Dirt, Bone Meal and any hoe"
+      - "&7in the tool slot - the hoe wears"
+      - "&7down normally, but is never fully"
+      - "&7consumed"
+      - ""
+      - "&7Works on its own, no need to"
+      - "&7click anything"
   GN_FERMENTER:
     name: "Fermenter"
     lore:
@@ -109,24 +119,27 @@ items:
   GN_WATER_SINK:
     name: "Water Sink"
     lore:
-      - "&7Right-click with a water bucket"
+      - "&eRight-click&7 with a water bucket"
       - "&7or water bottle to fill"
-      - "&7Once filled, right-click with an"
+      - "&7Once filled, &eright-click&7 with an"
       - "&7empty bucket/bottle for infinite water"
   GN_COW_IN_A_JAR:
     name: "Cow in a Jar"
     lore:
-      - "&7Right-click with a bucket"
+      - "&eRight-click&7 with a bucket"
       - "&7for infinite milk"
   GN_GREEN_HOUSE:
     name: "Green House"
     lore:
       - "&7Automatically grows any Gastronomicon"
       - "&7seed, bush or tree seedling"
+      - ""
       - "&7Place a Glass block directly above it"
+      - ""
       - "&7Feed it a seed, soil and fertilizer -"
       - "&7the seed and soil stay, only the"
       - "&7fertilizer is consumed every cycle"
+      - ""
       - "&7Infernal Bonemeal also works and"
       - "&7doubles the crops produced"
   GN_COUNTER:
@@ -135,6 +148,10 @@ items:
       - "&7A small storage unit"
   GN_CABINET:
     name: "Cabinet"
+    lore:
+      - "&7A large storage unit"
+  GN_ARTIFICIAL_BEEHIVE:
+    name: "Artificial Beehive"
     lore:
       - "&7A large storage unit"
   GN_FRIDGE_MODULE:
@@ -267,8 +284,8 @@ items:
     name: "Sesame Seeds"
   GN_VANILLA_BEANS:
     name: "Vanilla Beans"
-  GN_VANILLA_PLANT:
-    name: "Vanilla Plant"
+  GN_CINNAMON:
+    name: "Cinnamon"
   GN_LYCHEE:
     name: "Lychee"
   GN_LYCHEE_SAPLING:
@@ -513,6 +530,10 @@ items:
     name: "Soy Sauce"
   GN_TURMERIC_POWDER:
     name: "Turmeric Powder"
+  GN_COCOA_POWDER:
+    name: "Cocoa Powder"
+  GN_CHOCOLATE:
+    name: "Chocolate"
   GN_RED_BEAN_PASTE:
     name: "Red Bean Paste"
   GN_TAPIOCA_STARCH:
@@ -533,6 +554,16 @@ items:
     name: "Brown Sugar"
   GN_COFFEE_CUP:
     name: "Coffee Cup"
+  GN_CAPPUCCINO:
+    name: "Cappuccino"
+  GN_CAFE_LATTE:
+    name: "Caffe Latte"
+  GN_HOT_CHOCOLATE:
+    name: "Hot Chocolate"
+  GN_CARAMEL_CHOCOLATE_FRAPPE:
+    name: "Caramel Chocolate Frappe"
+  GN_ICED_COFFEE:
+    name: "Iced Coffee"
   GN_PBJ_SANDWICH:
     name: "PB&J Sandwich"
   GN_MARMALADE_SANDWICH:
@@ -551,6 +582,9 @@ items:
     name: "Egg Salad Sandwich"
   GN_ROAST_BEEF_SANDWICH:
     name: "Roast Beef Sandwich"
+  GN_PUFFERFISH_SANDWICH:
+    name: "Pufferfish Snack"
+    lore: "superHuxley's favorite snack"
   GN_GREEK_SALAD:
     name: "Greek Salad"
   GN_CAESAR_SALAD:
@@ -715,6 +749,8 @@ items:
     name: "Cranberry Muffin"
   GN_RAISIN_MUFFIN:
     name: "Raisin Muffin"
+  GN_ICE_ROCKS:
+    name: "Ice Rocks"
   GN_VANILLA_ICE_CREAM:
     name: "Vanilla Ice Cream"
   GN_CHOCOLATE_ICE_CREAM:
@@ -833,6 +869,18 @@ menu:
   seed_input: "Sapling Input"
   soil_input: "Soil Input"
   fertilizer_input: "Fertilizer Input"
+  fertilizer_input_lore:
+    - "&7Accepts:"
+    - "&7- Bone Meal"
+    - "&7- Infernal Bonemeal &8(doubles the fruit)"
+    - "&7- Slimefun Fertilizer &8(up to 8 uses per can)"
+  dirt_input: "Dirt Input"
+  bonemeal_input: "Bone Meal Input"
+  hoe_input: "Tool"
+  hoe_input_lore:
+    - "&7Accepts any hoe"
+    - "&7Wears down like a normal hoe,"
+    - "&7but is never fully consumed"
   recipe_book:
     name: "Recipe Book"
     lore:
@@ -843,6 +891,7 @@ menu:
   page_info: "Page {page} / {total}"
   back: "Back"
   return_to_machine: "Return to Machine"
+  green_house_fertilizer_uses: "&7Uses left: &e{uses}&7/&e{max}"
   recipe_book_title:
     cutting_board: "Cutting Board Recipes"
     culinary_workbench: "Culinary Workbench Recipes"
@@ -855,7 +904,7 @@ menu:
     name: "Water: &f{water} &7/ &f{capacity} &7mB"
     lore:
       - ""
-      - "&7Shift + Right-click with a water"
+      - "&eShift + Right-click&7 with a water"
       - "&7bucket or water bottle to fill"
   temperature:
     name: "Temperature"
@@ -986,3 +1035,80 @@ messages:
     invalid_food: "A valid food item must be placed in the middle slot"
     output_full: "Output slot is full!"
     not_proficient: "You are not proficient enough with this food yet! Required: {proficiency}/{threshold}"
+
+generated:
+  storage_variant_name_format: "{material} {type}"
+  water_storage_capacity_suffix: " storage capacity"
+  water_per_craft_suffix: " per craft"
+  gain_upon_eating: "Gain upon eating:"
+
+materials:
+  slab:
+    ACACIA_SLAB: "Acacia"
+    ANDESITE_SLAB: "Andesite"
+    BAMBOO_MOSAIC_SLAB: "Bamboo Mosaic"
+    BAMBOO_SLAB: "Bamboo"
+    BIRCH_SLAB: "Birch"
+    BLACKSTONE_SLAB: "Blackstone"
+    BRICK_SLAB: "Brick"
+    CHERRY_SLAB: "Cherry"
+    CINNABAR_BRICK_SLAB: "Cinnabar Brick"
+    CINNABAR_SLAB: "Cinnabar"
+    COBBLED_DEEPSLATE_SLAB: "Cobbled Deepslate"
+    COBBLESTONE_SLAB: "Cobblestone"
+    CRIMSON_SLAB: "Crimson"
+    CUT_COPPER_SLAB: "Cut Copper"
+    CUT_RED_SANDSTONE_SLAB: "Cut Red Sandstone"
+    CUT_SANDSTONE_SLAB: "Cut Sandstone"
+    DARK_OAK_SLAB: "Dark Oak"
+    DARK_PRISMARINE_SLAB: "Dark Prismarine"
+    DEEPSLATE_BRICK_SLAB: "Deepslate Brick"
+    DEEPSLATE_TILE_SLAB: "Deepslate Tile"
+    DIORITE_SLAB: "Diorite"
+    END_STONE_BRICK_SLAB: "End Stone Brick"
+    EXPOSED_CUT_COPPER_SLAB: "Exposed Cut Copper"
+    GRANITE_SLAB: "Granite"
+    JUNGLE_SLAB: "Jungle"
+    MANGROVE_SLAB: "Mangrove"
+    MOSSY_COBBLESTONE_SLAB: "Mossy Cobblestone"
+    MOSSY_STONE_BRICK_SLAB: "Mossy Stone Brick"
+    MUD_BRICK_SLAB: "Mud Brick"
+    NETHER_BRICK_SLAB: "Nether Brick"
+    OAK_SLAB: "Oak"
+    OXIDIZED_CUT_COPPER_SLAB: "Oxidized Cut Copper"
+    PALE_OAK_SLAB: "Pale Oak"
+    PETRIFIED_OAK_SLAB: "Petrified Oak"
+    POLISHED_ANDESITE_SLAB: "Polished Andesite"
+    POLISHED_BLACKSTONE_BRICK_SLAB: "Polished Blackstone Brick"
+    POLISHED_BLACKSTONE_SLAB: "Polished Blackstone"
+    POLISHED_CINNABAR_SLAB: "Polished Cinnabar"
+    POLISHED_DEEPSLATE_SLAB: "Polished Deepslate"
+    POLISHED_DIORITE_SLAB: "Polished Diorite"
+    POLISHED_GRANITE_SLAB: "Polished Granite"
+    POLISHED_SULFUR_SLAB: "Polished Sulfur"
+    POLISHED_TUFF_SLAB: "Polished Tuff"
+    PRISMARINE_BRICK_SLAB: "Prismarine Brick"
+    PRISMARINE_SLAB: "Prismarine"
+    PURPUR_SLAB: "Purpur"
+    QUARTZ_SLAB: "Quartz"
+    RED_NETHER_BRICK_SLAB: "Red Nether Brick"
+    RED_SANDSTONE_SLAB: "Red Sandstone"
+    RESIN_BRICK_SLAB: "Resin Brick"
+    SANDSTONE_SLAB: "Sandstone"
+    SMOOTH_QUARTZ_SLAB: "Smooth Quartz"
+    SMOOTH_RED_SANDSTONE_SLAB: "Smooth Red Sandstone"
+    SMOOTH_SANDSTONE_SLAB: "Smooth Sandstone"
+    SMOOTH_STONE_SLAB: "Smooth Stone"
+    SPRUCE_SLAB: "Spruce"
+    STONE_BRICK_SLAB: "Stone Brick"
+    STONE_SLAB: "Stone"
+    SULFUR_BRICK_SLAB: "Sulfur Brick"
+    SULFUR_SLAB: "Sulfur"
+    TUFF_BRICK_SLAB: "Tuff Brick"
+    TUFF_SLAB: "Tuff"
+    WARPED_SLAB: "Warped"
+    WAXED_CUT_COPPER_SLAB: "Waxed Cut Copper"
+    WAXED_EXPOSED_CUT_COPPER_SLAB: "Waxed Exposed Cut Copper"
+    WAXED_OXIDIZED_CUT_COPPER_SLAB: "Waxed Oxidized Cut Copper"
+    WAXED_WEATHERED_CUT_COPPER_SLAB: "Waxed Weathered Cut Copper"
+    WEATHERED_CUT_COPPER_SLAB: "Weathered Cut Copper"

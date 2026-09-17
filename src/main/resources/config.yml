@@ -8,7 +8,7 @@ options:
   # set a specific locale (e.g. en_US) here instead to override that.
   # Defaults to en_US if the resolved locale can't be found. See
   # lang/en_US.yml for how to add your own translation.
-  language: auto
+  language: pt-BR
 
 # Whether to disable adding Gastronomicon's plants to DynaTech's growing chambers.
 disable-dynatech-integration: true

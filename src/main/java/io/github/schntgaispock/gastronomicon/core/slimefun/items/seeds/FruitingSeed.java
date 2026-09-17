@@ -40,6 +40,12 @@ public class FruitingSeed extends SimpleSeed {
         }
 
         this.fruitingBody = SlimefunItem.getById(fruitingBodyId);
+        if (this.fruitingBody == null) {
+            Gastronomicon.log(Level.WARNING,
+                "FruitingSeed " + item.getItemId() + " could not find its fruiting body '" + fruitingBodyId
+                    + "' - make sure that item is registered BEFORE this seed in ItemSetup. "
+                    + "This seed will silently fail to grow its crop!");
+        }
     }
 
     @ParametersAreNonnullByDefault

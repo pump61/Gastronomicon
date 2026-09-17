@@ -69,13 +69,9 @@ public abstract class HuntingTrap extends SimpleSlimefunItem<BlockUseHandler> {
         });
 
         addItemHandler(new BlockTicker() {
-            
-            private boolean active = true;
 
             @Override
             public void tick(Block b, SlimefunItem item, Config config) {
-                if (!active) return;
-
                 if (triggeredTraps.containsKey(b.getLocation())) {
                     if (triggeredTraps.get(b.getLocation())) {
                         b.getWorld().spawnParticle(
@@ -89,7 +85,10 @@ public abstract class HuntingTrap extends SimpleSlimefunItem<BlockUseHandler> {
                             true);
                     }
                 } else {
-                    active = startCatch(b.getLocation());
+                    // Retries every tick until canCatch(l) succeeds - a single
+                    // trap in a bad spot must never stop other traps of this
+                    // same type from ever re-arming (see startCatch()).
+                    startCatch(b.getLocation());
                 }
             }
 
@@ -120,9 +119,13 @@ public abstract class HuntingTrap extends SimpleSlimefunItem<BlockUseHandler> {
     protected abstract boolean canCatch(Location l);
 
     private boolean startCatch(Location l) {
-        triggeredTraps.put(l, false);
         if (!canCatch(l))
             return false;
+
+        // Only claim the location once we know it can actually catch
+        // something - otherwise it would be stuck "waiting" here forever,
+        // since nothing else ever retries a location once it's in this map.
+        triggeredTraps.put(l, false);
 
         Gastronomicon.scheduleSyncDelayedTask(() -> {
             if (!NewBlockStorageUtil.hasBlock(l)) {

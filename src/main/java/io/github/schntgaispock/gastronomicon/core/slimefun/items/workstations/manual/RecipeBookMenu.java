@@ -10,6 +10,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import io.github.schntgaispock.gastronomicon.api.recipes.GastroRecipe;
+import io.github.schntgaispock.gastronomicon.api.recipes.MultiStoveRecipe;
 import io.github.schntgaispock.gastronomicon.api.recipes.RecipeRegistry;
 import io.github.schntgaispock.gastronomicon.api.recipes.components.RecipeComponent;
 import io.github.schntgaispock.gastronomicon.core.Lang;
@@ -48,6 +49,7 @@ public class RecipeBookMenu {
     private static final int[] DETAIL_INGREDIENT_BORDER_SLOTS = { 9, 18, 27 };
     private static final int DETAIL_CONTAINER_SLOT = 15;
     private static final int DETAIL_CONTAINER_BORDER_SLOT = 14;
+    private static final int DETAIL_TEMPERATURE_SLOT = 24;
     private static final int DETAIL_OUTPUT_SLOT = 33;
     private static final int DETAIL_OUTPUT_BORDER_SLOT = 32;
     private static final int[] DETAIL_TOOL_SLOTS = { 46, 47, 48, 49, 50, 51 };
@@ -156,6 +158,11 @@ public class RecipeBookMenu {
         final RecipeComponent<?> container = recipe.getInputs().getContainer();
         if (container != null && container != RecipeComponent.EMPTY) {
             menu.addItem(DETAIL_CONTAINER_SLOT, container.getDisplayItem(), (pl, slot, item, action) -> false);
+        }
+
+        if (recipe instanceof final MultiStoveRecipe msRecipe) {
+            menu.addItem(DETAIL_TEMPERATURE_SLOT, msRecipe.getTemperature().getItem().clone(),
+                (pl, slot, item, action) -> false);
         }
 
         int toolSlot = 0;
