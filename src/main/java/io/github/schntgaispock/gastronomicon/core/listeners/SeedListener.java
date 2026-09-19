@@ -3,7 +3,9 @@ package io.github.schntgaispock.gastronomicon.core.listeners;
 import java.util.logging.Level;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
+import com.xzavier0722.mc.plugin.slimefun4.storage.controller.SlimefunChunkData;
 import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import net.guizhanss.guizhanlib.slimefuncn.utils.NewBlockStorageUtil;
@@ -35,6 +37,7 @@ import io.github.schntgaispock.gastronomicon.core.slimefun.items.seeds.Duplicati
 import io.github.schntgaispock.gastronomicon.core.slimefun.items.seeds.FruitingSeed;
 import io.github.schntgaispock.gastronomicon.core.slimefun.items.seeds.VineSeed;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
+import io.github.thebusybiscuit.slimefun4.libraries.dough.protection.Interaction;
 
 public class SeedListener implements Listener {
 
@@ -101,6 +104,8 @@ public class SeedListener implements Listener {
 
     private static final int STORAGE_LOAD_RETRY_TICKS = 2;
     private static final int STORAGE_LOAD_MAX_ATTEMPTS = 100;
+    /** Attempts when Slimefun has no chunk data cached at all (nothing is loading, so do not wait long). */
+    private static final int STORAGE_MISSING_MAX_ATTEMPTS = 5;
 
     /**
      * Handles the break ourselves, at the earliest possible priority, instead
@@ -138,8 +143,21 @@ public class SeedListener implements Listener {
 
         final Location loc = b.getLocation();
         final Player player = e.getPlayer();
-        final ItemStack tool = player.getInventory().getItemInMainHand().clone();
         final SlimefunItem cached = StorageCacheUtils.getSfItem(loc);
+
+        // Plain vanilla crop: Slimefun's data for this chunk is fully loaded and it is not one of ours, so there
+        // is nothing to wait for. Leave the break alone; cancelling it here made every vanilla crop take several
+        // seconds to break.
+        if (cached == null && isChunkDataLoaded(b)) {
+            return;
+        }
+
+        // Do not bypass protection plugins (region protection etc.) by handling the break ourselves
+        if (!Slimefun.getProtectionManager().hasPermission(player, b, Interaction.BREAK_BLOCK)) {
+            return;
+        }
+
+        final ItemStack tool = player.getInventory().getItemInMainHand().clone();
 
         if (cached != null) {
             // Found immediately - handle it right now, using the block state
@@ -159,7 +177,7 @@ public class SeedListener implements Listener {
 
         e.setCancelled(true);
         final BukkitTask[] task = new BukkitTask[1];
-        final int[] attemptsRemaining = { STORAGE_LOAD_MAX_ATTEMPTS };
+        final int[] attemptsRemaining = { getChunkData(b) == null ? STORAGE_MISSING_MAX_ATTEMPTS : STORAGE_LOAD_MAX_ATTEMPTS };
         task[0] = Gastronomicon.scheduleSyncRepeatingTask(() -> {
             final SlimefunItem item = StorageCacheUtils.getSfItem(loc);
             if (item != null) {
@@ -175,11 +193,22 @@ public class SeedListener implements Listener {
                 return;
             }
 
-            if (--attemptsRemaining[0] <= 0) {
+            // The chunk data finished loading and there is still nothing here: it is a vanilla crop
+            if (--attemptsRemaining[0] <= 0 || isChunkDataLoaded(b)) {
                 b.breakNaturally(tool);
                 task[0].cancel();
             }
         }, STORAGE_LOAD_RETRY_TICKS, STORAGE_LOAD_RETRY_TICKS);
+    }
+
+    @Nullable
+    private static SlimefunChunkData getChunkData(@Nonnull Block b) {
+        return Slimefun.getDatabaseManager().getBlockDataController().getChunkDataFromCache(b.getChunk());
+    }
+
+    private static boolean isChunkDataLoaded(@Nonnull Block b) {
+        final SlimefunChunkData data = getChunkData(b);
+        return data != null && data.isDataLoaded();
     }
 
     @EventHandler
