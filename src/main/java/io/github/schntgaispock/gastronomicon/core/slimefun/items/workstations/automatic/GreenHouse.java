@@ -65,15 +65,22 @@ public class GreenHouse extends AContainer {
     public static final int STATUS_SLOT = 20;
     public static final int FERTILIZER_LABEL = 27;
     public static final int FERTILIZER_SLOT = 28;
-    public static final int[] OUTPUT_SLOTS = { 12, 13, 14, 21, 22, 23, 30, 31, 32 };
+    // Shifted one column right of the label/fertilizer column so the green
+    // border doesn't crowd the orange progress indicator in STATUS_SLOT.
+    public static final int[] OUTPUT_SLOTS = { 13, 14, 15, 22, 23, 24, 31, 32, 33 };
+    public static final int[] OUTPUT_BORDER_SLOTS = { 3, 4, 5, 6, 7,
+        12, 16,
+        21, 25,
+        30, 34,
+        39, 40, 41, 42, 43 };
     public static final int START_SLOT = 52;
     public static final int STOP_SLOT = 53;
     public static final int GREEN_HOUSE_FERTILIZER_USES = 8;
-    public static final int[] BACKGROUND_SLOTS = { 0, 1, 2, 3, 4, 5, 6, 7, 8,
-        11, 15, 16, 17,
-        24, 25, 26,
-        29, 33, 34, 35,
-        36, 37, 38, 39, 40, 41, 42, 43, 44,
+    public static final int[] BACKGROUND_SLOTS = { 0, 1, 2, 8,
+        11, 17,
+        26,
+        29, 35,
+        36, 37, 38, 44,
         45, 46, 47, 48, 49, 50, 51 };
 
     private static final ItemStack STATUS_IDLE_ITEM = new CustomItemStack(Material.BLACK_STAINED_GLASS_PANE, " ");
@@ -161,8 +168,9 @@ public class GreenHouse extends AContainer {
 
     protected void constructMenu(BlockMenuPreset preset) {
         draw(preset, GastroStacks.MENU_BACKGROUND_ITEM, BACKGROUND_SLOTS);
+        draw(preset, GastroStacks.MENU_GREEN_OUTPUT_BORDER, OUTPUT_BORDER_SLOTS);
         draw(preset, GastroStacks.MENU_SEED_INPUT, SEED_LABEL);
-        draw(preset, GastroStacks.MENU_SOIL_INPUT, SOIL_LABEL);
+        draw(preset, GastroStacks.MENU_FERTILE_SOIL_INPUT, SOIL_LABEL);
         draw(preset, GastroStacks.MENU_FERTILIZER_INPUT, FERTILIZER_LABEL);
         draw(preset, STATUS_IDLE_ITEM, STATUS_SLOT);
         draw(preset, GastroStacks.MENU_STOP_BUTTON, STOP_SLOT);

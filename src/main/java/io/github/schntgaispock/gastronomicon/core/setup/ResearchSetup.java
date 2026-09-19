@@ -34,7 +34,6 @@ public class ResearchSetup {
             .register();
         GastroResearch.MULTI_STOVE.addItems(GastroStacks.MULTI_STOVE).register();
         GastroResearch.GRAIN_MILL.addItems(GastroStacks.MILL).register();
-        GastroResearch.SOIL_FABRICATOR.addItems(GastroStacks.SOIL_FABRICATOR).register();
         GastroResearch.FREEZER
             .addItems(
                 GastroStacks.FREEZER,
@@ -72,7 +71,8 @@ public class ResearchSetup {
                 GastroStacks.ELECTRIC_KITCHEN_III,
                 GastroStacks.GREEN_HOUSE,
                 GastroStacks.TOASTER,
-                GastroStacks.COFFEE_MACHINE)
+                GastroStacks.COFFEE_MACHINE,
+                GastroStacks.SOIL_FABRICATOR)
             .register();
         GastroResearch.SICKLES
             .addItems(

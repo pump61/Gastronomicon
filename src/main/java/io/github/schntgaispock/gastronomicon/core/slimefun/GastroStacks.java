@@ -235,14 +235,14 @@ public class GastroStacks {
         "&9" + Lang.get("menu.seed_input"));
     public static final ItemStack MENU_SOIL_INPUT = new CustomItemStack(Material.BLUE_STAINED_GLASS_PANE,
         "&9" + Lang.get("menu.soil_input"));
-    public static final ItemStack MENU_FERTILIZER_INPUT = new CustomItemStack(Material.BLUE_STAINED_GLASS_PANE,
-        "&9" + Lang.get("menu.fertilizer_input"), lore(Lang.getList("menu.fertilizer_input_lore")));
-    public static final ItemStack MENU_DIRT_INPUT = new CustomItemStack(Material.BLUE_STAINED_GLASS_PANE,
-        "&9" + Lang.get("menu.dirt_input"));
+    public static final ItemStack MENU_FERTILE_SOIL_INPUT = new CustomItemStack(Material.BLUE_STAINED_GLASS_PANE,
+        "&9" + Lang.get("menu.fertile_soil_input"));
     public static final ItemStack MENU_BONEMEAL_INPUT = new CustomItemStack(Material.BLUE_STAINED_GLASS_PANE,
         "&9" + Lang.get("menu.bonemeal_input"));
-    public static final ItemStack MENU_HOE_INPUT = new CustomItemStack(Material.BLACK_STAINED_GLASS_PANE,
-        ChatColor.of("#999999") + Lang.get("menu.hoe_input"), lore(Lang.getList("menu.hoe_input_lore")));
+    public static final ItemStack MENU_FERTILIZER_INPUT = new CustomItemStack(Material.BLUE_STAINED_GLASS_PANE,
+        "&9" + Lang.get("menu.fertilizer_input"), lore(Lang.getList("menu.fertilizer_input_lore")));
+    public static final ItemStack MENU_GREEN_OUTPUT_BORDER = new CustomItemStack(
+        Material.GREEN_STAINED_GLASS_PANE, "&2" + Lang.get("menu.output_border"));
 
     // ---- Dummy ----
 
@@ -423,13 +423,6 @@ public class GastroStacks {
         Material.GRINDSTONE,
         Lang.get("items.GN_MILL.name"));
 
-    public static final SlimefunItemStack SOIL_FABRICATOR = ThemedItemStack.of(
-        GastroTheme.MECHANICAL,
-        "GN_SOIL_FABRICATOR",
-        Material.COMPOSTER,
-        Lang.get("items.GN_SOIL_FABRICATOR.name"),
-        lore(Lang.getList("items.GN_SOIL_FABRICATOR.lore")));
-
     public static final SlimefunItemStack FERMENTER = ThemedItemStack.of(
         GastroTheme.MECHANICAL,
         "GN_FERMENTER",
@@ -510,7 +503,7 @@ public class GastroStacks {
     public static final SlimefunItemStack ARTIFICIAL_BEEHIVE = ThemedItemStack.of(
         GastroTheme.MECHANICAL,
         "GN_ARTIFICIAL_BEEHIVE",
-        Material.HONEYCOMB_BLOCK,
+        Material.BEEHIVE,
         Lang.get("items.GN_ARTIFICIAL_BEEHIVE.name"),
         lore(Lang.getList("items.GN_ARTIFICIAL_BEEHIVE.lore")));
 
@@ -563,6 +556,16 @@ public class GastroStacks {
         LoreBuilder.powerBuffer(256),
         LoreBuilder.powerPerSecond(16),
         LoreBuilder.speed(1));
+
+    public static final SlimefunItemStack SOIL_FABRICATOR = ThemedItemStack.of(
+        GastroTheme.ELECTRIC,
+        "GN_SOIL_FABRICATOR",
+        Material.COMPOSTER,
+        Lang.get("items.GN_SOIL_FABRICATOR.name"),
+        lore(Lang.getList("items.GN_SOIL_FABRICATOR.lore"),
+        LoreBuilder.machine(MachineTier.END_GAME, MachineType.MACHINE),
+        LoreBuilder.powerBuffer(256),
+        LoreBuilder.powerPerSecond(16)));
 
     public static final SlimefunItemStack ELECTRIC_KITCHEN_II = ThemedItemStack.of(
         GastroTheme.ELECTRIC,

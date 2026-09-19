@@ -94,16 +94,6 @@ items:
     name: "Freezer"
   GN_MILL:
     name: "Mill"
-  GN_SOIL_FABRICATOR:
-    name: "Soil Fabricator"
-    lore:
-      - "&7Insert Dirt, Bone Meal and any hoe"
-      - "&7in the tool slot - the hoe wears"
-      - "&7down normally, but is never fully"
-      - "&7consumed"
-      - ""
-      - "&7Works on its own, no need to"
-      - "&7click anything"
   GN_FERMENTER:
     name: "Fermenter"
     lore:
@@ -176,6 +166,16 @@ items:
     name: "Electric Kitchen &7- &eII"
   GN_ELECTRIC_KITCHEN_III:
     name: "Electric Kitchen &7- &eIII"
+  GN_SOIL_FABRICATOR:
+    name: "Soil Fabricator"
+    lore:
+      - "&7Insert Dirt, Bone Meal and any hoe"
+      - "&7in the tool slot - the hoe wears"
+      - "&7down normally, but is never fully"
+      - "&7consumed"
+      - ""
+      - "&7Works on its own, no need to"
+      - "&7click anything"
   GN_RICE:
     name: "Rice"
   GN_QUINOA:
@@ -868,19 +868,14 @@ menu:
   no_greenhouse_roof: "Missing Glass Roof"
   seed_input: "Sapling Input"
   soil_input: "Soil Input"
+  fertile_soil_input: "Fertile Soil Input"
+  bonemeal_input: "Bone Meal Input"
   fertilizer_input: "Fertilizer Input"
   fertilizer_input_lore:
     - "&7Accepts:"
     - "&7- Bone Meal"
     - "&7- Infernal Bonemeal &8(doubles the fruit)"
     - "&7- Slimefun Fertilizer &8(up to 8 uses per can)"
-  dirt_input: "Dirt Input"
-  bonemeal_input: "Bone Meal Input"
-  hoe_input: "Tool"
-  hoe_input_lore:
-    - "&7Accepts any hoe"
-    - "&7Wears down like a normal hoe,"
-    - "&7but is never fully consumed"
   recipe_book:
     name: "Recipe Book"
     lore:

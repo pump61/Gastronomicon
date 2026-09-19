@@ -5,7 +5,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Nonnull;
 
@@ -38,8 +41,20 @@ public class Lang {
     private static final String DEFAULT_LOCALE = "en_US";
     private static final String AUTO_LOCALE = "auto";
 
+    /**
+     * Tier glyphs from the server's shared ItemsAdder rarity font (see
+     * {@code contents/abtall/configs/rarity.yml}) - same convention every
+     * other addon on this server uses for the last lore line of an item.
+     */
+    private static final Map<String, String> TIER_GLYPHS = Map.of(
+        "COMMON", "&f𳭙",
+        "RARE", "&f𳭚",
+        "EPIC", "&f𳭉",
+        "LEGENDARY", "&f𳭋");
+
     private static YamlConfiguration fallback;
     private static YamlConfiguration active;
+    private static final Map<String, String> ITEM_RARITY = new HashMap<>();
 
     public static void setup() {
         fallback = loadBundled(DEFAULT_LOCALE);
@@ -54,6 +69,20 @@ public class Lang {
         if (active == null) {
             Gastronomicon.warn("Could not find a language file for locale \"" + locale + "\", falling back to " + DEFAULT_LOCALE + ".");
             active = fallback;
+        }
+
+        loadRarity();
+    }
+
+    private static void loadRarity() {
+        ITEM_RARITY.clear();
+        final InputStream stream = Gastronomicon.getInstance().getResource("rarity.yml");
+        if (stream == null) {
+            return;
+        }
+        final YamlConfiguration rarity = YamlConfiguration.loadConfiguration(new InputStreamReader(stream, StandardCharsets.UTF_8));
+        for (final String id : rarity.getKeys(false)) {
+            ITEM_RARITY.put(id, rarity.getString(id));
         }
     }
 
@@ -88,14 +117,36 @@ public class Lang {
         return value == null ? path : value;
     }
 
+    private static final java.util.regex.Pattern ITEM_LORE_KEY = java.util.regex.Pattern.compile("^items\\.(GN_[A-Z0-9_]+)\\.lore$");
+
     /**
      * Gets a translated list of strings for the given key, e.g. a lore list.
      * Falls back to en_US if the key is missing or empty in the active locale.
+     * <br>
+     * <br>
+     * When {@code path} is an item's lore key ({@code items.<ID>.lore}), the
+     * item's tier glyph (from {@code rarity.yml}, matching every other addon
+     * on this server's rarity convention) is appended as the final line, so
+     * every item shows its tier regardless of whether it has flavor text.
      */
     @Nonnull
     public static List<String> getList(@Nonnull String path) {
         final List<String> value = active.getStringList(path);
-        return value.isEmpty() ? fallback.getStringList(path) : value;
+        final List<String> result = new ArrayList<>(value.isEmpty() ? fallback.getStringList(path) : value);
+
+        final java.util.regex.Matcher matcher = ITEM_LORE_KEY.matcher(path);
+        if (matcher.matches()) {
+            final String tier = ITEM_RARITY.get(matcher.group(1));
+            final String glyph = tier == null ? null : TIER_GLYPHS.get(tier);
+            if (glyph != null) {
+                if (!result.isEmpty()) {
+                    result.add("");
+                }
+                result.add(glyph);
+            }
+        }
+
+        return result;
     }
 
     @Nonnull

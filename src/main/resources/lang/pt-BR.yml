@@ -82,16 +82,6 @@ items:
     name: "Freezer"
   GN_MILL:
     name: "Moinho"
-  GN_SOIL_FABRICATOR:
-    name: "Fabricante de Solo"
-    lore:
-      - "&7Insira Terra, Farinha de Osso e"
-      - "&7qualquer enxada na ferramenta -"
-      - "&7a enxada desgasta normalmente,"
-      - "&7mas nunca é totalmente consumida"
-      - ""
-      - "&7Funciona sozinho, sem precisar"
-      - "&7clicar em nada"
   GN_FERMENTER:
     name: "Fermentador"
     lore:
@@ -161,6 +151,13 @@ items:
     name: "Cozinha Elétrica &7- &eII"
   GN_ELECTRIC_KITCHEN_III:
     name: "Cozinha Elétrica &7- &eIII"
+  GN_SOIL_FABRICATOR:
+    name: "Fabricante de Solo"
+    lore:
+      - "&7Insira Terra, Farinha de Osso e"
+      - "&7qualquer enxada na ferramenta -"
+      - "&7a enxada desgasta normalmente,"
+      - "&7mas nunca é totalmente consumida"
   GN_RICE:
     name: "Arroz"
   GN_QUINOA:
@@ -853,19 +850,14 @@ menu:
   no_greenhouse_roof: "Falta o Vidro"
   seed_input: "Entrada de Muda"
   soil_input: "Entrada de Terra"
+  fertile_soil_input: "Entrada de Solo Fértil"
+  bonemeal_input: "Entrada de Farinha de Osso"
   fertilizer_input: "Entrada de Fertilizante"
   fertilizer_input_lore:
     - "&7Aceita:"
     - "&7- Farinha de Osso"
     - "&7- Farinha de Osso Infernal &8(dobra a fruta)"
     - "&7- Fertilizante do Slimefun &8(até 8 usos por lata)"
-  dirt_input: "Entrada de Terra"
-  bonemeal_input: "Entrada de Farinha de Osso"
-  hoe_input: "Ferramenta"
-  hoe_input_lore:
-    - "&7Aceita qualquer enxada"
-    - "&7Desgasta como uma enxada normal,"
-    - "&7mas nunca é totalmente consumida"
   recipe_book:
     name: "Livro de Receitas"
     lore:

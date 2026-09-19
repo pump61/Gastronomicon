@@ -25,5 +25,5 @@ public class GastroResearch {
     public static final Research PROCESSED_INGREDIENTS = new Research(Gastronomicon.key("processed_ingredients"), startKey + 13, "Processed Ingredients", 19);
     public static final Research FOOD = new Research(Gastronomicon.key("food"), startKey + 14, "Fine Cuisine", 32);
     public static final Research CHEFS_HAT = new Research(Gastronomicon.key("chefs_hat"), startKey + 15, "Chef's Hat", 5);
-    
+
 }

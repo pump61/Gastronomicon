@@ -1,40 +1,35 @@
-# Gastronomicon (Gourmet)
+# Gastronomicon (AbsolutGG)
 
-A Slimefun addon that adds many food items.
+Addon de culinária para o Slimefun do servidor **AbsolutGG**, inspirado nos mods
+*Cooking for Blockheads* e *Farmer's Delight* de Minecraft - centenas de ingredientes,
+pratos, máquinas de cozinha e ferramentas próprias.
 
-This addon automatically adds crop automation content to DynaTech.
+Adaptado e mantido por **Veronika** ([@Veroniika4](https://github.com/Veroniika4)) a partir
+do addon original [Gastronomicon](https://github.com/SchnTgaiSpock/Gastronomicon) (por
+SchnTgaiSpock/SlimefunGuguProject).
 
-You can disable plugin integrations in `config.yml`.
+## O que foi customizado pro AbsolutGG
 
-<p align="center">
-  <a href="https://builds.guizhanss.net/SlimefunGuguProject/Gastronomicon/master/">
-    <img src="https://builds.guizhanss.net/f/SlimefunGuguProject/Gastronomicon/master/badge.svg" alt="Build status"/>
-  </a>
-</p>
+- **Tradução completa pra PT-BR** (`lang/pt-BR.yml`) - nomes e lore de todos os itens,
+  menus, guia e mensagens. Segue o mesmo `Slimefun` de idioma do servidor automaticamente
+  (`options.language: auto` no `config.yml`).
+- **Tags de raridade** (`rarity.yml`) - cada item ganha o glifo de tier padrão do servidor
+  (o mesmo sistema usado pelos outros addons, via a fonte customizada do ItemsAdder) como
+  última linha da lore, injetado automaticamente por `Lang.java` sem precisar mexer em cada
+  item individualmente.
 
-## Gameplay
+## Requisitos
 
-Please check the Wiki: <https://schn.pages.dev/gastronomicon>
+- Paper ou derivado
+- Slimefun (fork `Slimefun4-dev` do servidor)
+- Java 21
 
-## Requirements
+## Créditos
 
-- Paper or a derivative server
-- Slimefun DEV 1040 (RC 33) or newer
-- Minecraft 1.17+
-- Java 17+
+- Addon original: [SchnTgaiSpock](https://github.com/SchnTgaiSpock) / SlimefunGuguProject
+- Adaptação e funcionalidade completa pro servidor: **Veronika**
+- Texturas de cabeça vêm de [minecraft-heads.com](https://minecraft-heads.com/)
 
-*ExoticGarden is not required, but strongly recommended!*
+## Licença
 
-## API
-
-API documentation can be found on the Wiki: <https://schn.pages.dev/gastronomicon/custom-food>
-
-## Changelog
-
-See the original at [https://github.com/SchnTgaiSpock/Gastronomicon#changelog]
-
-## Credits
-
-Head textures come from [minecraft-heads.com](https://minecraft-heads.com/)
-
-[![minecraft-heads banner](https://images.minecraft-heads.com/banners/minecraft-heads.webp)](https://minecraft-heads.com/)
+GPLv3 (ver [LICENSE](LICENSE)), herdada do projeto original.

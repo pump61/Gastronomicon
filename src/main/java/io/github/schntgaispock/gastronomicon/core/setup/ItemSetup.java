@@ -550,14 +550,6 @@ public class ItemSetup {
                 null, ANDESITE_SLAB, null
             }).register(gn);
 
-        new SoilFabricator(
-            GastroStacks.SOIL_FABRICATOR,
-            new ItemStack[] {
-                null, new ItemStack(Material.IRON_HOE), null,
-                new ItemStack(Material.DIRT), new ItemStack(Material.COMPOSTER), new ItemStack(Material.DIRT),
-                null, new ItemStack(Material.BONE_MEAL), null
-            }).register(gn);
-
         new Fermenter(
             GastroStacks.FERMENTER,
             new ItemStack[] {
@@ -648,6 +640,14 @@ public class ItemSetup {
                 GastroStacks.CULINARY_WORKBENCH, SlimefunItems.CARBONADO_EDGED_CAPACITOR, GastroStacks.MULTI_STOVE,
                 GastroStacks.FREEZER, GastroStacks.MILL, GastroStacks.FERMENTER,
                 SlimefunItems.BLISTERING_INGOT_3, SlimefunItems.CARGO_MOTOR, SlimefunItems.BLISTERING_INGOT_3
+            }).register(gn);
+
+        new SoilFabricator(
+            GastroStacks.SOIL_FABRICATOR,
+            new ItemStack[] {
+                null, new ItemStack(Material.IRON_HOE), null,
+                new ItemStack(Material.DIRT), new ItemStack(Material.COMPOSTER), new ItemStack(Material.DIRT),
+                null, SlimefunItems.ELECTRIC_MOTOR, null
             }).register(gn);
 
         new ElectricKitchen(
